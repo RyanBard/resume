@@ -1,0 +1,112 @@
+/* http://www.getallfix.com/2011/11/convert-empxpt-and-in-css/ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+p, span, a, li {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+html, body {
+  min-width: 800px;
+  max-width: 800px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* could also try a combination of float:left & float:right */
+#info_section {
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+  column-count: 2;
+}
+
+.info {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 13px;
+}
+
+.description {
+  margin-top: 10px;
+  font-size: 13px;
+  text-indent: 25px;
+  color: black;
+}
+
+.banner {
+/*  color: orange;*/
+  color: black;
+  text-align: center;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.work_experience_item {
+  margin-bottom: 40px;
+}
+
+.section {
+/*  color: blue;*/
+  color: black;
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.sub_section {
+/*  color: magenta;*/
+  color: black;
+  text-decoration: underline;
+}
+
+.emphasized {
+/*  color: red;*/
+  color: black;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 13px;
+}
+
+.organization_name {
+/*  color: green;*/
+  color: black;
+  font-weight: bold;
+  font-style: italic;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.single_col_line_items {
+  -moz-column-count: 1;
+  -webkit-column-count: 1;
+  column-count: 1;
+}
+
+.single_col_line_item {
+/*  color: brown;*/
+  color: black;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.multi_col_line_items {
+  -moz-column-count: 3;
+  -webkit-column-count: 3;
+  column-count: 3;
+  list-style-position: inside; /* Workaround for a bug in Chrome */
+}
+
+.multi_col_line_item {
+/*  color: purple;*/
+  color: black;
+  margin-top: 0;
+  margin-bottom: 0;
+}

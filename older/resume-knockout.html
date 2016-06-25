@@ -1,0 +1,105 @@
+<html>
+  <head>
+    <script type="text/javascript" src="./knockout-3.3.0.debug.js"></script>
+    <script type="text/javascript" src="./jquery-1.7.1.debug.js"></script>
+    <script type="text/javascript" src="./resume-data.js"></script>
+    <script type="text/javascript" src="./resume-knockout.js"></script>
+    <link href="./resume.css" type="text/css" rel="stylesheet"/>
+  </head>
+  <body data-bind="with: resume">
+    <h1 class="banner" data-bind="text: $root.fullName(name)"></h1>
+    <div id="info_section">
+      <div id="address" data-bind="with: addresses[0]">
+        <p class="info" data-bind="text: street"></p>
+        <p class="info"><span class="info" data-bind="text: city"></span>, <span class="info" data-bind="text: state"></span> <span class="info" data-bind="text: zip"></span></p>
+      </div>
+      <div id="contacts" data-bind="foreach: contacts">
+        <p class="info"><span class="info" data-bind="text: type"></span>: <a class="info" data-bind="attr: {href: $root.formatContactAttr(type, value)}, text: $root.formatContactValue(type, value)"></a></p>
+      </div>
+      <div id="social" data-bind="foreach: social">
+        <p class="info"><span class="info" data-bind="text: type"></span>: <a class="info" data-bind="attr: {href: $root.formatContactAttr(type, value)}, text: $root.formatContactValue(type, value)"></a></p>
+      </div>
+    </div>
+    <div id="purpose">
+      <h2 class="section">Purpose</h2>
+      <p class="description" data-bind="text: purpose"></p>
+      <div>
+        <h2 class="sub_section">Interests:</h2>
+        <ul class="multi_col_line_items" data-bind="foreach: interests">
+          <li class="multi_col_line_item" data-bind="text: $data"></li>
+        </ul>
+      </div>
+    </div>
+    <br><br> <!-- TODO: Figure out a better way to handle this in CSS -->
+    <div id="work_experience">
+      <h2 class="section">Work Experience</h2>
+      <div data-bind="foreach: work_experience">
+        <div>
+          <p class="emphasized"><span class="emphasized" data-bind="text: $root.formatDate(date_range.start)"></span> - <span class="emphasized" data-bind="text: $root.formatDate(date_range.end)"></span></p>
+          <p class="organization_name" data-bind="text: company"></p>
+          <p class="emphasized" data-bind="text: title"></p>
+        </div>
+        <p class="description" data-bind="text: description"></p>
+        <div>
+          <div data-bind="css: {hidden: responsibilities.length === 0}">
+            <h3 class="sub_section">Responsibilities Included:</h3>
+            <ul class="single_col_line_items" data-bind="foreach: responsibilities">
+              <li class="single_col_line_item" data-bind="text: $data"></li>
+            </ul>
+          </div>
+          <div data-bind="css: {hidden: achievements.length === 0}">
+            <h3 class="sub_section">Achievements:</h3>
+            <ul class="single_col_line_items" data-bind="foreach: achievements">
+              <li class="single_col_line_item" data-bind="text: $data"></li>
+            </ul>
+          </div>
+          <div data-bind="css: {hidden: technologies.length === 0}">
+            <h3 class="sub_section">Technologies Used:</h3>
+            <ul class="multi_col_line_items" data-bind="foreach: technologies">
+              <li class="multi_col_line_item" data-bind="text: $data"></li>
+            </ul>
+          </div>
+          <div data-bind="css: {hidden: soft_skills.length === 0}">
+            <h3 class="sub_section">Soft Skills Learned:</h3>
+            <ul class="multi_col_line_items" data-bind="foreach: soft_skills">
+              <li class="multi_col_line_item" data-bind="text: $data"></li>
+            </ul>
+          </div>
+        </div>
+        <br><br> <!-- TODO: Figure out a better way to handle this in CSS -->
+      </div>
+    </div>
+    <div id="hobbies" data-bind="with: hobbies">
+      <h2 class="section">Hobbies</h2>
+      <p class="description" data-bind="text: description"></p>
+      <ul class="multi_col_line_items" data-bind="foreach: hobbies">
+        <li class="multi_col_line_item" data-bind="text: $data"></li>
+      </ul>
+    </div>
+    <div id="education" data-bind="with: education">
+      <h2 class="section">Education</h2>
+      <div data-bind="foreach: $data">
+        <p class="emphasized" data-bind="text: degree"></p>
+        <p class="emphasized" data-bind="text: school_name"></p>
+        <p class="emphasized">Graduated: <span class="emphasized" data-bind="text: $root.formatDate(graduation_date)"></span></p>
+        <p class="emphasized">GPA: <span class="emphasized" data-bind="text: gpa"></span></p>
+        <p class="emphasized">Major GPA: <span class="emphasized" data-bind="text: major_gpa"></span></p>
+      </div>
+    </div>
+    <div id="references" data-bind="with: $root.visibleReferences">
+      <h2 class="section">References</h2>
+      <div data-bind="visible: $data.length > 0">
+        <div data-bind="foreach: $data">
+          <p class="info" data-bind="text: $root.fullName(name)"></p>
+          <div data-bind="foreach: contacts">
+            <p class="info"><span class="info" data-bind="text: type"></span>: <span class="info" data-bind="text: value"></span></p>
+          </div>
+          <br> <!-- TODO: Figure out a better way to handle this in CSS -->
+        </div>
+      </div>
+      <div data-bind="visible: $data.length === 0">
+        <p class="info">Available upon request</p>
+      </div>
+    </div>
+  </body>
+</html>

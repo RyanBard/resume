@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+
+<html ng-app="resumeApp"
+      ng-strict-di>
+
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <!--
+      The MIT License (MIT)
+
+      Copyright (c) 2015 John Ryan Bard
+
+      Permission is hereby granted, free of charge, to any person obtaining a copy
+      of this software and associated documentation files (the "Software"), to deal
+      in the Software without restriction, including without limitation the rights
+      to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+      copies of the Software, and to permit persons to whom the Software is
+      furnished to do so, subject to the following conditions:
+
+      The above copyright notice and this permission notice shall be included in
+      all copies or substantial portions of the Software.
+
+      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+      IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+      FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+      AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+      LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+      THE SOFTWARE.
+    -->
+
+    <title>Resume</title>
+
+    <script>
+      (function (window) {
+        'use strict';
+
+        window.message = [
+          "Ah you're having a look at things. Poke around and let me know what ",
+          "you think. Some choices in the code were just so the code would be ",
+          "more standalone -- it's harder for me to make it self contained if ",
+          "it requires a server to serve up html and js files."
+        ];
+      }(window));
+    </script>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+    <script>
+      (function (window) {
+        'use strict';
+
+        /*
+         * This will eventually go in a DB (probably MongoDB) and I would stand up a REST endpoint
+         * to retrieve it (and probably modify too).  I could then choose how I would represent
+         * references (I had them in this data at one point, but it didn't make sense to be there
+         * because I would just have to filter it out on the server anyway -- I wouldn't want to
+         * share references data most of the time and filtering that data away on the client-side
+         * would be pointless, as you no doubt know since you are viewing source and/or messing
+         * around in the dev console).
+         */
+        window.resumeData = [
+          {
+            "id": 123,
+            "purpose": "To obtain a software developer position and grow in an interesting language or field.",
+            "interests": [
+              "C",
+              "C++",
+              "Java",
+              "JavaScript",
+              "Objective-C",
+              "Ruby"
+            ],
+            "name": {
+              "surname": "Bard",
+              "given": "John",
+              "middle": "Ryan"
+            },
+            "addresses": [
+              {
+                "street": "2306 Robin Lane",
+                "city": "Smyrna",
+                "state": "GA",
+                "zip": "30080"
+              }
+            ],
+            "contacts": [
+              {
+                "type": "Cell",
+                "value": "678-438-9941"
+              },
+              {
+                "type": "Email",
+                "value": "john.ryan.bard@gmail.com"
+              }
+            ],
+            "social": [
+              {
+                "type": "LinkedIn",
+                "value": "http://www.linkedin.com/pub/john-bard/12/b5a/551"
+              },
+              {
+                "type": "GitHub",
+                "value": "https://github.com/RyanBard"
+              }
+            ],
+            "work_experience": [
+              {
+                "date_range": {
+                  "start": "2014-05-12",
+                  "end": null
+                },
+                "company": "Georgia Tech Research Institute",
+                "title": "Research Scientist",
+                "description": "Designed and developed front-end and back-end software for webapps mimicking google's services (mail, drive, etc.) but focussing on security.",
+                "responsibilities": [
+                ],
+                "achievements": [
+                  "Met aggressive deadlines on a very late project",
+                  "Created the first unit tests for that project",
+                  "Researched and implemented significant parts of an SMTP & IMAP server for a proof of concept in under a month"
+                ],
+                "technologies": [
+                  "AngularJS 1.2-1.5",
+                  "UI Bootstap",
+                  "LESS (CSS)",
+                  "RequireJS",
+                  "Java 1.7",
+                  "JUnit",
+                  "TestNG",
+                  "Groovy",
+                  "Spock",
+                  "Gradle",
+                  "Maven",
+                  "SELinux",
+                  "TypeSafe Config",
+                  "Guava",
+                  "Guice",
+                  "Jackson",
+                  "Jersey",
+                  "Spring Web MVC",
+                  "REST",
+                  "JSON",
+                  "slf4j",
+                  "JSP",
+                  "Tuckey UrlRewriteFilter",
+                  "JasmineJS",
+                  "Codahale Metrics",
+                  "Apache Qpid (AMQP)",
+                  "SQL (Oracle)",
+                  "PL/SQL",
+                  "git",
+                  "NodeJS",
+                  "SMTP",
+                  "IMAP",
+                  "WireShark",
+                  "bash",
+                  "curl",
+                  "telnet",
+                  "Jmeter",
+                  "IntelliJ",
+                  "Eclipse",
+                  "Sublime Text",
+                  "RHEL"
+                ],
+                "soft_skills": [
+                  "Confluence",
+                  "Stash/BitBucket",
+                  "Jenkins",
+                  "Bamboo",
+                  "JIRA"
+                ]
+              },
+              {
+                "date_range": {
+                  "start": "2013-02-04",
+                  "end": "2014-05-09"
+                },
+                "company": "Ericsson",
+                "title": "Senior Software Engineer",
+                "description": "Developed back-end software that supports many aspects of Video On Demand.  This included rentals, bookmarks, setup and teardown of HTTP / RTSP / DSMCC sessions, generating URLs for CDNs, applying concurrency restrictions, authenticating requests, saving statistics, and issuing alerts.",
+                "responsibilities": [
+                ],
+                "achievements": [
+                  "Created scripts and wiki pages for consistent dev deployment steps",
+                  "Created the first automated smoke/integration tests",
+                  "Helped build tools for QA to leverage when writing automated tests (sdk wrapper for auth testing, tweaked the RTSP Jmeter plugin, created a CDN simulator, created a DSMCC Jmeter plugin)",
+                  "Fixed the CI configuration (adjusted nightly builds, turned on unit test running)",
+                  "Cleaned up code in various modules"
+                ],
+                "technologies": [
+                  "Erlang R15 & R16",
+                  "Rebar",
+                  "MochiWeb",
+                  "Cowboy",
+                  "WebMachine",
+                  "Meck",
+                  "Emongo",
+                  "REST",
+                  "RTSP",
+                  "DSMCC",
+                  "JSON",
+                  "NoSQL (MongoDB)",
+                  "RabbitMQ (AMQP)",
+                  "Ruby 1.9",
+                  "Ruby on Rails 3.2",
+                  "RVM",
+                  "Bundler",
+                  "Rake",
+                  "Rspec",
+                  "Decent Exposure",
+                  "Mongoid 2",
+                  "git",
+                  "bash",
+                  "yum",
+                  "Jenkins",
+                  "curl",
+                  "Jmeter",
+                  "Java 1.7",
+                  "Sublime Text",
+                  "Eclipse"
+                ],
+                "soft_skills": [
+                  "Gitorious",
+                  "GitHub",
+                  "VersionOne"
+                ]
+              },
+              {
+                "date_range": {
+                  "start": "2012-09-04",
+                  "end": "2013-01-18"
+                },
+                "company": "Altisource",
+                "title": "Senior Software Engineer",
+                "description": "Developed software involved in migrating backlog data and synchronizing live updates of that data from a legacy database to the new products' MySQL database.",
+                "responsibilities": [
+                ],
+                "achievements": [
+                  "Added the first true unit tests",
+                  "Cleaned up integration tests",
+                  "Optimized and cleaned up the build",
+                  "Prepared the project for CI (Bamboo)",
+                  "Corrected anti-patterns throughout the project (and a few bugs)",
+                  "Cleaned up tons of compiler warnings",
+                  "Changed the process of developers running locally (and running integration tests) against a shared database to everyone running against their own local instance of MySQL"
+                ],
+                "technologies": [
+                  "Java 1.7",
+                  "Mockito",
+                  "Mybatis",
+                  "Spring Integration",
+                  "Spring REST Client",
+                  "Groovy",
+                  "JSON",
+                  "Maven 3",
+                  "SQL (MySQL)",
+                  "git",
+                  "rpm",
+                  "Chef",
+                  "RabbitMQ (AMQP)",
+                  "Yammer Metrics",
+                  "Eclipse"
+                ],
+                "soft_skills": [
+                  "Bamboo",
+                  "Fisheye",
+                  "Confluence",
+                  "JIRA"
+                ]
+              },
+              {
+                "date_range": {
+                  "start": "2008-02-12",
+                  "end": "2012-08-31"
+                },
+                "company": "MModal (formerly MedQuist)",
+                "title": "Software Architect",
+                "description": "Architected, designed, and developed software for medical transcription services. Used various technologies including EJB, Hibernate, Spring, etc.",
+                "responsibilities": [
+                ],
+                "achievements": [
+                  "Set up Splunk to index logs and email alerts for errors in dev, QA, and PT",
+                  "Refactored many pieces of legacy JDBC and stored procedure code to use Spring JdbcTemplate and JPA Entities",
+                  "Ported over a series of DB scripts to create a schema from scratch from 1 project to another so I could have a repeatable fresh environment separate from our shared dev environment (there was only the shared dev environment to test on for this project)",
+                  "With Talend Open Studio, I took a month to rewrite an archive and purge solution that took one of our DBAs a year to develop in PL/SQL (and didn't solve all of the requirements)"
+                ],
+                "technologies": [
+                  "Java 1.5 & 1.6",
+                  "Maven 2",
+                  "JMS",
+                  "Apache Struts1",
+                  "PMD",
+                  "JBoss 4.0.5, 4.2, 4.3, & 5.1",
+                  "Tiles",
+                  "Cobertura",
+                  "JMX MBeans",
+                  "JavaScript",
+                  "JUnit 3 & 4",
+                  "PL/SQL",
+                  "Hibernate/JPA",
+                  "EasyMock",
+                  "SQL (Oracle)",
+                  "JDBC",
+                  "Selenium",
+                  "Talend Open Studio",
+                  "slf4j",
+                  "Logging (JDK Logger)",
+                  "SoapUI",
+                  "JProfiler",
+                  "Jaxb",
+                  "AspectJ",
+                  "Oracle Coherence (as a 2nd level cache for Hibernate)",
+                  "Groovy",
+                  "Velocity Templates",
+                  "EJB2 (Stateless Session)",
+                  "sed/awk",
+                  "Bash Scripting",
+                  "EJB3 (JTA, Stateless Session, MDBs, Interceptors)",
+                  "Splunk 3 & 4",
+                  "Batch Scripting",
+                  "J2EE (JSP, Custom Taglibs, Servlets)",
+                  "XML (DOM, XSLT, Xpath, Xquery)",
+                  "OSB (Oracle Service Bus - Oracle's ESB)",
+                  "Python/IronPython/Jython",
+                  "Spring Framework (core, tx, ws, jdbc, webmvc)",
+                  "C# (consumed our webservices by writing test apps in C#)",
+                  "Eclipse"
+                ],
+                "soft_skills": [
+                ]
+              },
+              {
+                "date_range": {
+                  "start": "2007-08-01",
+                  "end": "2008-02-11"
+                },
+                "company": "Guru Software Services",
+                "title": "Software Engineer - Lead Developer",
+                "description": "I was the Lead Developer in the U.S. I interfaced with customers and managed an outsource team in India. I primarily developed in J2EE technologies with Eclipse. I used Spring Framework for dependency injection, Apache Commons for logging, and Hibernate for Object-Relational Mapping. I created and maintained webapps with JSP that were tested in Apache Tomcat and wrote the Ant build files for deployment (in both Windows and Linux environment). I also researched the control of scanners with JTwain and the re-writing of a TWAIN wrapper for Java.",
+                "responsibilities": [
+                  "Gather requirements from customer and fine tuned these requirements in daily/weekly meetings",
+                  "Design interfaces and create associated documentation (screen shots & storyboards)",
+                  "Oversee the functionality & development of the user interface",
+                  "Design the implementation and create the design documents (UML)",
+                  "Estimate the initial time bids for projects",
+                  "Communicate the requirements to the outsource team in India",
+                  "Code review (and intervene when problems arise)",
+                  "Q/A test in both Windows and Linux environments",
+                  "Customer acceptance test and make any required modifications to the project"
+                ],
+                "achievements": [
+                ],
+                "technologies": [
+                  "Java 1.4",
+                  "J2EE",
+                  "Apache Commons Logging (log4j)",
+                  "JTwain/TWAIN",
+                  "Spring Framework",
+                  "Apache Ant",
+                  "JNI",
+                  "Hibernate",
+                  "Apache Tomcat",
+                  "HTML",
+                  "CSS",
+                  "JSP"
+                ],
+                "soft_skills": [
+                ]
+              },
+              {
+                "date_range": {
+                  "start": "2007-05-21",
+                  "end": "2007-07-31"
+                },
+                "company": "Guru Software Services (via Georgia Tech)",
+                "title": "Software Engineer - Team Lead",
+                "description": "I was the Team Lead in the development of the Rates Management Module of the Logi-soft software. We created a JSP webapp for managing shipping rates and calculating estimates for trucking costs. We used Hibernate for ORM and tested in Tomcat. In addition to developing the JSP pages and Hibernate code, I personally setup and managed a CVS repository as well as wrote the Ant build file and handled the deployment and delivery of the module to Guru Software Services.",
+                "responsibilities": [
+                ],
+                "achievements": [
+                ],
+                "technologies": [
+                  "Java 1.4",
+                  "J2EE",
+                  "Apache Ant",
+                  "Hibernate",
+                  "Apache Tomcat",
+                  "HTML",
+                  "CSS",
+                  "JSP"
+                ],
+                "soft_skills": [
+                ]
+              }
+            ],
+            "hobbies": {
+              "description": "Almost all of my hobbies are centered around computers and technology. If the Zombie Apocalypse ever comes, I'm in trouble.",
+              "hobbies": [
+                "JavaScript",
+                "KnockoutJS",
+                "AngularJS",
+                "NodeJS (Express, Mongoose)",
+                "Groovy",
+                "Grails",
+                "Python",
+                "Perl",
+                "Ruby",
+                "Rails",
+                "Clojure",
+                "YAWS",
+                "C",
+                "C++",
+                "Qt",
+                "GTK+",
+                "Arduino",
+                "Objective-C",
+                "Smalltalk",
+                "MongoDB",
+                "ANTLR",
+                "Lex & Yacc",
+                "Debian",
+                "FreeBSD",
+                "Lua",
+                "WebRTC",
+                "HTML5 (Canvas, LocalStorage, WebSocket, WebWorker)",
+                "Elixir",
+                "Homebrewing (beer, mead, cider)"
+              ]
+            },
+            "education": [
+              {
+                "degree": "B.S. in Computer Science",
+                "school_name": "Georgia Institute of Technology",
+                "graduation_date": "2007-12",
+                "gpa": 3.05,
+                "major_gpa": 3.44
+              }
+            ]
+          }
+        ];
+      }(window));
+    </script>
+
+    <script>
+      (function (angular, resumeData, message) {
+        'use strict';
+
+        var module = angular.module('resumeApp', []);
+
+        /*
+         * A little easter egg if you open the dev console instead of just viewing source.
+         */
+        module.run(function () {
+          if (console) {
+            console.log(message.join('\n'));
+          }
+        });
+
+        /**
+         * @ngdoc directive
+         * @param {object} address the address to display
+         * @description Use this directive to display an address.
+         * @example <div resume-address address="addr"></div>
+         */
+        module.directive(
+          'resumeAddress',
+          [
+            function () {
+              return {
+                scope: {
+                  address: '='
+                },
+                templateUrl: 'resume-address.html'
+              };
+            }
+          ]
+        );
+
+        /**
+         * @ngdoc directive
+         * @requires resumeService
+         * @param {array} contacts the contacts to display
+         * @description Use this directive to display a list of contacts.
+         * @example <div resume-contacts contacts="contactMethods"></div>
+         */
+        module.directive(
+          'resumeContacts',
+          [
+            'resumeService',
+            function (resumeService) {
+              return {
+                scope: {
+                  contacts: '='
+                },
+                templateUrl: 'resume-contacts.html',
+                link: function (scope, element, attributes) {
+                  scope.contactLink = resumeService.contactLink;
+                }
+              };
+            }
+          ]
+        );
+
+        /**
+         * @ngdoc directive
+         * @param {string} label the label for the sub-section's header
+         * @param {array} items the items to display in the sub-section
+         * @param {boolean} multiColumn whether to display the list of items in multiple columns or not
+         * @description Use this directive to display a sub-section that will have a list of items.
+         * @example <div resume-sub-section label="Something:" items="things" multiColumn="true"></div>
+         */
+        module.directive(
+          'resumeSubSection',
+          [
+            function () {
+              return {
+                scope: {
+                  label: '@',
+                  items: '=',
+                  multiColumn: '='
+                },
+                templateUrl: 'resume-sub-section.html',
+                link: function (scope, element, attributes) {
+                  /*
+                   * TODO - I should probably find a better way to style this than 2 classes, however,
+                   * 2 flattened out classes is better performance than a more complex CSS selector.
+                   */
+                  if (scope.multiColumn) {
+                    scope.ulClass = 'multi_col_line_items';
+                    scope.liClass = 'multi_col_line_item';
+                  } else {
+                    scope.ulClass = 'single_col_line_items';
+                    scope.liClass = 'single_col_line_item';
+                  }
+                }
+              };
+            }
+          ]
+        );
+
+        /**
+         * @ngdoc service
+         * @requires $q
+         * @requires $window
+         * @description I'm simulating a {@link ngResource.$resource $resource} so I can have something work locally,
+         * but later be able to stand a back-end up to hold the data without too much fuss.
+         */
+        module.factory(
+          'Resume',
+          [
+            '$q',
+            '$window',
+            function (
+              $q,
+              $window
+            ) {
+              var service = {},
+                  findResume = function (id) {
+                    var resumes = $window.resumeData.filter(
+                      function (resume) {
+                        return resume.id === id;
+                      }
+                    );
+                    return resumes[0];
+                  };
+
+              /**
+               * @ngdoc method
+               * @param {object} input the input object that contains the id property to filter on
+               * @description This method simulate's {@link ngResource.$resource#methods_get $resource's get method} by
+               * filtering the local resume data and using {@link ng.$q $q} to resolve a promise and fill in the
+               * original empty object given back to the caller (and also maintain the $resolved & $promise like a
+               * user of $resource would expect).
+               */
+              service.get = function (input) {
+                var p = $q.defer(),
+                    result = {};
+                  p.promise.then(
+                    function (response) {
+                      /*
+                       * The angular.copy will wipe away the $promise, so I have to save it and set it back in case
+                       * the caller wants to register another function after the promise is resolved.
+                       */
+                      var promise = result.$promise;
+                      angular.copy(response, result);
+                      result.$promise = promise;
+                      result.$resolved = true;
+                    }
+                  );
+                  result.$promise = p.promise;
+                  result.$resolved = false;
+                  p.resolve(findResume(input.id));
+                return result;
+              };
+
+              return service;
+            }
+          ]
+        );
+
+        /**
+         * @ngdoc service
+         * @description A service to hold any reusable code.
+         */
+        module.factory(
+          'resumeService',
+          [
+            function () {
+              var service = {};
+
+              /**
+               * @ngdoc method
+               * @param {object} contact the contact object to figure out what kind of link to make for a contact method
+               * @description Takes a contact object and returns a string of the link (value for the href attribute) to that contact.
+               * @returns {string} the value for an anchor's href attribute
+               */
+              service.contactLink = function(contact) {
+                if (contact.type === "Email") {
+                  return "mailto:" + contact.value;
+                } else if (contact.type === "Cell") {
+                  //TODO: Put in more types here (and use a better way to do it).
+                  return "tel:" + contact.value;
+                } else {
+                  // TODO: Maybe work a "URL" type, and display a "name" or something instead.
+                  return contact.value;
+                }
+              };
+
+              /**
+               * @ngdoc method
+               * @param {object} name the name object with the given name, surname, and middle name
+               * @description Takes a name object and formats it into a string for display.
+               * @returns {string} the name flattened out into a string as "First Middle Last" or "First Last" if no middle name is specified
+               */
+              service.formatFullName = function(name) {
+                if (!name) {
+                  return '';
+                }
+                return name.given + (name.middle ? " " + name.middle + " " : " ") + name.surname;
+              };
+
+              return service;
+            }
+          ]
+        );
+
+        /**
+         * @ngdoc filter
+         * @requires resumeService
+         * @param {object} name the name object that contains the given name, surname, and middle name
+         * @description Use this filter to display a full name from an object with parts of that full name.
+         * @example {{nameObject | fullName}}
+         */
+        module.filter(
+          'fullName',
+          [
+            'resumeService',
+            function (resumeService) {
+              return function (name) {
+                return resumeService.formatFullName(name);
+              };
+            }
+          ]
+        );
+
+        /**
+         * @ngdoc controller
+         * @requires $scope
+         * @requires $window
+         * @requires Resume
+         * @requires resumeService
+         * @description A controller for displaying the details of a single resume.
+         */
+        module.controller(
+          'ResumeController',
+          [
+            '$scope',
+            '$window',
+            'Resume',
+            'resumeService',
+            function (
+              $scope,
+              $window,
+              Resume,
+              resumeService
+            ) {
+              $scope.contactLink = resumeService.contactLink;
+              $scope.fullName = resumeService.fullName;
+              $scope.resume = Resume.get({id: 123});
+              $scope.resume.$promise.catch(
+                function (error) {
+                  /*
+                   * TODO yuck, window.alert!  When converting this to have a back-end, use something more
+                   * reasonable like: https://github.com/Foxandxss/angular-toastr
+                   */
+                  $window.alert(JSON.stringify(error));
+                }
+              );
+            }
+          ]
+        );
+
+      }(window.angular, window.resumeData, window.message));
+    </script>
+
+    <style>
+      /* http://www.getallfix.com/2011/11/convert-empxpt-and-in-css/ */
+
+      h1, h2, h3, h4, h5, h6 {
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+      }
+
+      p, span, a, li {
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+      }
+
+      html, body {
+        min-width: 800px;
+        max-width: 800px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      /* could also try a combination of float:left & float:right */
+      #info_section {
+        -moz-column-count: 2;
+        -webkit-column-count: 2;
+        column-count: 2;
+      }
+
+      .info {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 13px;
+      }
+
+      .description {
+        margin-top: 10px;
+        font-size: 13px;
+        text-indent: 25px;
+        color: black;
+      }
+
+      .banner {
+      /*  color: orange;*/
+        color: black;
+        text-align: center;
+        font-weight: bold;
+        font-size: 22px;
+      }
+
+      .work_experience_item {
+        margin-bottom: 40px;
+      }
+
+      .section {
+      /*  color: blue;*/
+        color: black;
+        text-transform: uppercase;
+        text-decoration: underline;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+
+      .sub_section {
+      /*  color: magenta;*/
+        color: black;
+        text-decoration: underline;
+      }
+
+      .emphasized {
+      /*  color: red;*/
+        color: black;
+        font-weight: bold;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 13px;
+      }
+
+      .organization_name {
+      /*  color: green;*/
+        color: black;
+        font-weight: bold;
+        font-style: italic;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      .single_col_line_items {
+        -moz-column-count: 1;
+        -webkit-column-count: 1;
+        column-count: 1;
+      }
+
+      .single_col_line_item {
+      /*  color: brown;*/
+        color: black;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      .multi_col_line_items {
+        -moz-column-count: 3;
+        -webkit-column-count: 3;
+        column-count: 3;
+        list-style-position: inside; /* Workaround for a bug in Chrome */
+      }
+
+      .multi_col_line_item {
+      /*  color: purple;*/
+        color: black;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    </style>
+
+    <!-- HTML partials for my directives. -->
+
+    <script id="resume-address.html"
+            type="text/ng-template">
+      <p class="info"
+         ng-bind="address.street">
+      </p>
+      <p class="info">
+        <span ng-bind-template="{{address.city}}, {{address.state}} {{address.zip}}">
+        </span>
+      </p>
+    </script>
+
+    <script id="resume-contacts.html"
+            type="text/ng-template">
+      <p class="info"
+         ng-repeat="contact in contacts">
+        <span class="info"
+              ng-bind="contact.type">
+        </span>
+        :
+        <a class="info"
+           ng-href="{{contactLink(contact)}}"
+           ng-bind="contact.value">
+        </a>
+      </p>
+    </script>
+
+    <script id="resume-sub-section.html"
+            type="text/ng-template">
+      <h3 class="sub_section">
+        <span ng-bind="label">
+        </span>
+      </h3>
+      <ul ng-class="ulClass">
+        <li ng-class="liClass"
+            ng-repeat="item in items"
+            ng-bind="item">
+        </li>
+      </ul>
+    </script>
+
+  </head>
+
+  <body ng-controller="ResumeController">
+
+    <h1 class="banner"
+        ng-bind="resume.name | fullName">
+    </h1>
+
+    <div id="info_section">
+
+      <div id="address"
+           resume-address
+           address="resume.addresses[0]">
+      </div>
+
+      <div id="contacts"
+           resume-contacts
+           contacts="resume.contacts">
+      </div>
+
+      <div id="social"
+           resume-contacts
+           contacts="resume.social">
+      </div>
+
+    </div>
+
+    <!-- TODO - maybe all sections should have an outer ng-if, make a directive? -->
+    <div id="purpose">
+
+      <h2 class="section">
+        Purpose
+      </h2>
+
+      <p class="description"
+         ng-bind="resume.purpose">
+      </p>
+
+      <div ng-if="resume.interests.length">
+        <h2 class="sub_section">
+          Interests:
+        </h2>
+        <ul class="multi_col_line_items">
+          <li class="multi_col_line_item"
+              ng-repeat="interest in resume.interests"
+              ng-bind="interest">
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div id="work_experience">
+
+      <h2 class="section">
+        Work Experience
+      </h2>
+
+      <div class="work_experience_item"
+           ng-repeat="item in resume.work_experience">
+
+        <div>
+
+          <p class="emphasized">
+            <span class="emphasized"
+                  ng-bind="item.date_range.start | date: 'longDate'">
+            </span>
+            -
+            <span class="emphasized"
+                  ng-if="!item.date_range.end">
+              present
+            </span>
+            <span class="emphasized"
+                  ng-if="item.date_range.end"
+                  ng-bind="item.date_range.end | date: 'longDate'">
+            </span>
+          </p>
+
+          <p class="organization_name"
+             ng-bind="item.company">
+          </p>
+
+          <p class="emphasized"
+             ng-bind="item.title">
+          </p>
+
+        </div>
+
+        <p class="description"
+           ng-bind="item.description">
+        </p>
+
+        <div ng-if="item.responsibilities.length"
+             resume-sub-section
+             label="Responsibilities:"
+             items="item.responsibilities"
+             multi-column="false">
+        </div>
+
+        <div ng-if="item.achievements.length"
+             resume-sub-section
+             label="Achievements:"
+             items="item.achievements"
+             multi-column="false">
+        </div>
+
+        <div ng-if="item.technologies.length"
+             resume-sub-section
+             label="Technologies:"
+             items="item.technologies"
+             multi-column="true">
+        </div>
+
+        <div ng-if="item.soft_skills.length"
+             resume-sub-section
+             label="Soft Skills:"
+             items="item.soft_skills"
+             multi-column="true">
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="hobbies">
+      <h2 class="section">
+        Hobbies
+      </h2>
+      <p class="description"
+         ng-bind="resume.hobbies.description">
+      </p>
+      <ul class="multi_col_line_items">
+        <li class="multi_col_line_item"
+            ng-repeat="hobby in resume.hobbies.hobbies"
+            ng-bind="hobby">
+        </li>
+      </ul>
+    </div>
+
+    <div id="education">
+      <h2 class="section">
+        Education
+      </h2>
+      <div ng-repeat="item in resume.education">
+        <p class="emphasized"
+           ng-bind="item.degree">
+        </p>
+        <p class="emphasized"
+           ng-bind="item.school_name">
+        </p>
+        <p class="emphasized">
+          Graduated:
+          <span class="emphasized"
+                ng-bind="item.graduation_date | date: 'longDate'">
+          </span>
+        </p>
+        <p class="emphasized">
+          GPA:
+          <span class="emphasized"
+                ng-bind="item.gpa">
+          </span>
+        </p>
+        <p class="emphasized">
+          Major GPA:
+          <span class="emphasized"
+                ng-bind="item.major_gpa">
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <div id="references">
+      <h2 class="section">
+        References
+      </h2>
+      <p class="info">
+        Available upon request
+      </p>
+    </div>
+
+  </body>
+
+</html>
