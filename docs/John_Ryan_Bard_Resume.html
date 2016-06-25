@@ -435,7 +435,7 @@
               {
                 "degree": "B.S. in Computer Science",
                 "school_name": "Georgia Institute of Technology",
-                "graduation_date": "2007-12",
+                "graduation_date": 1197897000000, /* December 2007 */
                 "gpa": 3.05,
                 "major_gpa": 3.44
               }
@@ -1017,7 +1017,7 @@
         <p class="emphasized">
           Graduated:
           <span class="emphasized"
-                ng-bind="item.graduation_date | date: 'longDate'">
+                ng-bind="item.graduation_date | date: 'MMMM yyyy'">
           </span>
         </p>
         <p class="emphasized">
