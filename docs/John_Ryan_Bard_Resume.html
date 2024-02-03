@@ -64,492 +64,566 @@
          */
         window.resumeData = [
           {
-            "id": 123,
-            "purpose": "To obtain a software developer position and grow in an interesting language or domain.",
-            "interests": [
-              "C",
-              "C++",
-              "Elixir",
-              "Go",
-              "JavaScript",
-              "Lisp / Clojure",
-              "Python",
-              "Ruby",
-              "Rust"
+            id: 123,
+            purpose: 'To obtain a software developer position and grow in an interesting language or domain.',
+            interests: [
+              'C / C++',
+              'Elixir',
+              'Go',
+              'JavaScript',
+              'Lisp / Clojure',
+              'Rust'
             ],
-            "name": {
-              "surname": "Bard",
-              "given": "John",
-              "middle": "Ryan"
+            name: {
+              surname: 'Bard',
+              given: 'John',
+              middle: 'Ryan'
             },
-            "addresses": [
+            addresses: [
               {
-                "street": "2306 Robin Lane",
-                "city": "Smyrna",
-                "state": "GA",
-                "zip": "30080"
+                street: '2306 Robin LN SE',
+                city: 'Smyrna',
+                state: 'GA',
+                zip: '30080'
               }
             ],
-            "contacts": [
+            contacts: [
               {
-                "type": "Cell",
-                "value": "678-438-9941"
+                type: 'Cell',
+                value: '678-438-9941'
               },
               {
-                "type": "Email",
-                "value": "john.ryan.bard@gmail.com"
+                type: 'Email',
+                value: 'john.ryan.bard@gmail.com'
               }
             ],
-            "social": [
+            social: [
               {
-                "type": "LinkedIn",
-                "value": "http://www.linkedin.com/pub/john-bard/12/b5a/551"
+                type: 'LinkedIn',
+                value: 'http://www.linkedin.com/pub/john-bard/12/b5a/551'
               },
               {
-                "type": "GitHub",
-                "value": "https://github.com/RyanBard"
+                type: 'GitHub',
+                value: 'https://github.com/RyanBard'
               }
             ],
-            "work_experience": [
+            work_experience: [
               {
-                "date_range": {
-                  "start": "2017-10-02",
-                  "end": null
+                date_range: {
+                  start: '2021-07-06',
+                  end: null
                 },
-                "company": "VMware AirWatch",
-                "title": "Senior MTS - Java",
-                "description": "Contributed to the development of front-end and back-end software for mobile devices and web applications.",
-                "responsibilities": [
+                company: 'Flock Safety',
+                title: 'Software Developer',
+                description: 'Contributed to the design and implementation of back-end software handling automated license plate readers, audio detection, automatic vehicle location, drones, and computer aided dispatch',
+                responsibilities: [],
+                achievements: [
+                  'Revitalized the unit tests that were only present in a few microservices, expanded them into many modules, improved them, and encouraged others to write them',
+                  'Implemented the first integration tests at the company, and helped come up with plans to automatically run them as part of our builds',
+                  'Implemented a microservice similar to postbin to allow testing of interactions with 3rd party apis and our exporting into them, which was severely under tested before that',
+                  'Revitalized the smoke tests at the company, encouraged these tests to be part of the requirements of features, and implemented around 50% of those tests offering much needed automated testing for several microservices',
+                  'Implemented a common lib to offer reasonable OAuth2 behavior (fetch and cache tokens as needed before making an api call, invalidate and re-fetch when getting a 401, try to pre-fetch a token before the current expires, etc.) and reduces all of the duplicated OAuth2 handling code, while fixing bugs, improving performance, and reducing our Auth0 quota usage',
+                  'Helped design, implement, and improve a circuit breaker lib, as well as leveraged it to improve the stability of several services',
+                  'Designed and implemented a way to offer OAuth2 for customer facing APIs via Auth0 instead of implementing our own auth server',
+                  'Designed and reviewed the implementation of a mechanism to batch exporting of our data through webhooks, to improve the performance of our system, and reduce stress on the systems receiving our webhooks',
+                  'Redesigned and implemented improvements to our websockets service to be more performant with broadcasting',
+                  'Redesigned and reimplemented our mechanism of having a message driven architecture from using a sidecar to handle sqs messages to using a library, which eased the pain of our hpa scaling, and reduced resource usage',
+                  'Helped design and implement data warehousing for reports against the prod database that were slow and taxing'
                 ],
-                "achievements": [
-                  "Quickly ramped up on domain and project knowledge",
-                  "Wrote several 'Connectors' for interfacing with APIs such as GitHub, GitLab, ServiceNow, etc.",
-                  "Reduced a project from about 2100 lines of java code + config running in EC2 to a little under 700 lines of javascript code + config running in AWS Lambda",
-                  "Wrote many mock backends and simple test connectors in NodeJS to help developers/QA/management test and to help Sales demo the product"
+                technologies: [
+                  'golang 1.16-1.21',
+                  'sirupsen/logrus',
+                  'gin-gonic/gin',
+                  'gorrilla/mux',
+                  'go-redis',
+                  'aws-sdk-go (v1-v2)',
+                  'go-playground/validator/v10',
+                  'auth0/go-jwt-middleware',
+                  'form3tech-oss/jwt-go',
+                  'golang-jwt/jwt',
+                  'pkg/errors',
+                  'stretchr/testify',
+                  'jmoiron/sqlx',
+                  'uptrace/bun',
+                  'kelseyhightower/envconfig',
+                  'prometheus/client_golang',
+                  'python (2.7, 3.10)',
+                  'nodejs (12-20)',
+                  'typescript (4.6-4.8)',
+                  'jest',
+                  'superagent',
+                  'fetch',
+                  'ioredis',
+                  'winston',
+                  'inversify',
+                  'p-map',
+                  'p-settle',
+                  'lodash',
+                  'massivejs',
+                  'AWS S3',
+                  'AWS SQS/SNS',
+                  'AWS DynamoDB',
+                  'AWS RDS (SQL/Postgres)',
+                  'AWS Elasticache (redis)',
+                  'AWS OpenSearch (ElasticSearch)',
+                  'AWS EKS (Kubernetes)',
+                  'AWS Lambda',
+                  'AWS CloudWatch',
+                  'Docker',
+                  'Grafana',
+                  'Prometheus',
+                  'Helm Charts',
+                  'Terraform',
+                  'DataDog',
+                  'LogDNA',
+                  'gRPC',
+                  'REST',
+                  'WebSockets',
+                  'Postman',
+                  'curl',
+                  'git'
                 ],
-                "technologies": [
-                  "JavaScript",
-                  "NodeJS",
-                  "ExpressJS",
-                  "Mocha",
-                  "Chai",
-                  "ElectronJS",
-                  "HandlebarsJS",
-                  "Gulp",
-                  "Java 8-14",
-                  "Spring",
-                  "RxJava",
-                  "Hibernate",
-                  "JUnit",
-                  "Guava",
-                  "Jackson",
-                  "slf4j",
-                  "Maven",
-                  "HAL",
-                  "SQL (PostgreSQL)",
-                  "NoSQL (Redis)",
-                  "OAuth2",
-                  "JWT",
-                  "git",
-                  "bash",
-                  "curl",
-                  "Postman",
-                  "IntelliJ",
-                  "Sublime Text"
-                ],
-                "soft_skills": [
-                  "AWS",
-                  "Bitbucket",
-                  "Confluence",
-                  "Jira",
-                  "Github",
-                  "Bamboo"
+                soft_skills: [
+                  'VS Code',
+                  'Sublime Text',
+                  'GitHub',
+                  'Jenkins',
+                  'Confluence',
+                  'Jira'
                 ]
               },
               {
-                "date_range": {
-                  "start": "2017-02-20",
-                  "end": "2017-04-21"
+                date_range: {
+                  start: '2021-01-19',
+                  end: '2021-06-03'
                 },
-                "company": "The Home Depot",
-                "title": "Senior Java Developer",
-                "description": "Contributed to the development of front-end and back-end software for a webapp to manage the products sold in stores.",
-                "responsibilities": [
+                company: 'Travel Syndication Technology (TST)',
+                title: 'Software Developer',
+                description: 'Contributed to the development of travel webapps (booking flights, rooms, rental cars, etc.)',
+                responsibilities: [],
+                achievements: [],
+                technologies: [
+                  'Scala 2.12',
+                  'Play',
+                  'Hibernate',
+                  'MySQL',
+                  'MongoDB',
+                  'JavaScript',
+                  'Docker',
+                  'Bash',
+                  'Git',
                 ],
-                "achievements": [
-                  "Quickly ramped up on domain and project knowledge"
-                ],
-                "technologies": [
-                  "Javascript",
-                  "AngularJS 1.5",
-                  "Angular Material",
-                  "Sass (CSS)",
-                  "JasmineJS",
-                  "Protractor",
-                  "NodeJS",
-                  "Gulp",
-                  "Java 1.8",
-                  "Spring Boot",
-                  "Spring Web MVC",
-                  "Spring Data",
-                  "Hibernate",
-                  "JUnit",
-                  "Guava",
-                  "Jackson",
-                  "slf4j",
-                  "Gradle",
-                  "Mybatis",
-                  "SQL (MySQL)",
-                  "git",
-                  "bash",
-                  "curl",
-                  "netcat",
-                  "Postman",
-                  "Newman",
-                  "IntelliJ",
-                  "Sublime Text"
-                ],
-                "soft_skills": [
-                  "Pivotal Cloud Foundry",
-                  "Pivotal Tracker",
-                  "Github",
-                  "Jenkins"
+                soft_skills: [
+                  'Jenkins',
+                  'Jira',
+                  'IntelliJ',
+                  'Kibana',
+                  'Github',
+                  'Sublime Text',
                 ]
               },
               {
-                "date_range": {
-                  "start": "2014-05-12",
-                  "end": "2017-02-17"
+                date_range: {
+                  start: '2017-10-02',
+                  end: '2021-01-15'
                 },
-                "company": "Georgia Tech Research Institute",
-                "title": "Research Scientist",
-                "description": "Designed and developed front-end and back-end software for webapps mimicking google's services (mail, drive, etc.) but focusing on security.",
-                "responsibilities": [
+                company: 'VMware AirWatch',
+                title: 'Senior MTS - Java',
+                description: 'Contributed to the development of front-end and back-end software for mobile devices and web applications.',
+                responsibilities: [],
+                achievements: [
+                  'Quickly ramped up on domain and project knowledge',
+                  'Wrote several "Connectors" for interfacing with APIs such as GitHub, GitLab, ServiceNow, etc.',
+                  'Reduced a project from about 2100 lines of java code + config running in EC2 to a little under 700 lines of javascript code + config running in AWS Lambda',
+                  'Wrote many mock backends and simple test connectors in NodeJS to help developers/QA/management test and to help Sales demo the product'
                 ],
-                "achievements": [
-                  "Met aggressive deadlines on a very late project",
-                  "Created the first unit tests for that project",
-                  "Researched and implemented significant parts of an SMTP & IMAP server for a proof of concept in under a month"
+                technologies: [
+                  'JavaScript',
+                  'NodeJS',
+                  'ExpressJS',
+                  'Mocha',
+                  'Chai',
+                  'ElectronJS',
+                  'HandlebarsJS',
+                  'Gulp',
+                  'Java 8-14',
+                  'Spring',
+                  'RxJava',
+                  'Hibernate',
+                  'JUnit',
+                  'Guava',
+                  'Jackson',
+                  'slf4j',
+                  'Maven',
+                  'HAL',
+                  'SQL (PostgreSQL)',
+                  'NoSQL (Redis)',
+                  'OAuth2',
+                  'JWT',
+                  'git',
+                  'bash',
+                  'curl',
+                  'Postman',
+                  'IntelliJ',
+                  'Sublime Text'
                 ],
-                "technologies": [
-                  "Javascript",
-                  "AngularJS 1.2-1.5",
-                  "Angular Material",
-                  "UI Bootstap",
-                  "LESS (CSS)",
-                  "RequireJS",
-                  "Java 1.7",
-                  "JEE",
-                  "JUnit",
-                  "TestNG",
-                  "Groovy",
-                  "Spock",
-                  "Gradle",
-                  "Gulp",
-                  "Maven",
-                  "SELinux",
-                  "TypeSafe Config",
-                  "Guava",
-                  "Guice",
-                  "Jackson",
-                  "JAX-RS (Jersey)",
-                  "Spring Web MVC",
-                  "REST",
-                  "JSON",
-                  "slf4j",
-                  "Tuckey UrlRewriteFilter",
-                  "JasmineJS",
-                  "Metrics (Dropwizard)",
-                  "AMQP (Apache Qpid)",
-                  "SQL (Oracle)",
-                  "PL/SQL",
-                  "git",
-                  "NodeJS",
-                  "SMTP",
-                  "IMAP",
-                  "WireShark",
-                  "iptables",
-                  "bash",
-                  "curl",
-                  "telnet",
-                  "netcat",
-                  "Jmeter",
-                  "IntelliJ",
-                  "Sublime Text",
-                  "RHEL"
-                ],
-                "soft_skills": [
-                  "Confluence",
-                  "Stash/BitBucket",
-                  "Jenkins",
-                  "Bamboo",
-                  "JIRA"
+                soft_skills: [
+                  'AWS',
+                  'Kibana',
+                  'AWS CloudWatch',
+                  'Bitbucket',
+                  'Confluence',
+                  'Jira',
+                  'Github',
+                  'Bamboo'
                 ]
               },
               {
-                "date_range": {
-                  "start": "2013-02-04",
-                  "end": "2014-05-09"
+                date_range: {
+                  start: '2017-02-20',
+                  end: '2017-04-21'
                 },
-                "company": "Ericsson",
-                "title": "Senior Software Engineer",
-                "description": "Developed back-end software that supports many aspects of Video On Demand.  This included rentals, bookmarks, setup and teardown of HTTP / RTSP / DSMCC sessions, generating URLs for CDNs, applying concurrency restrictions, authenticating requests, saving statistics, and issuing alerts.",
-                "responsibilities": [
+                company: 'The Home Depot',
+                title: 'Senior Java Developer',
+                description: 'Contributed to the development of front-end and back-end software for a webapp to manage the products sold in stores.',
+                responsibilities: [],
+                achievements: [
+                  'Quickly ramped up on domain and project knowledge'
                 ],
-                "achievements": [
-                  "Created scripts and wiki pages for consistent dev deployment steps",
-                  "Created the first automated smoke/integration tests",
-                  "Helped build tools for QA to leverage when writing automated tests (sdk wrapper for auth testing, tweaked the RTSP Jmeter plugin, created a CDN simulator, created a DSMCC Jmeter plugin)",
-                  "Fixed the CI configuration (adjusted nightly builds, turned on unit test running)",
-                  "Cleaned up code in various modules"
+                technologies: [
+                  'Javascript',
+                  'AngularJS 1.5',
+                  'Angular Material',
+                  'Sass (CSS)',
+                  'JasmineJS',
+                  'Protractor',
+                  'NodeJS',
+                  'Gulp',
+                  'Java 1.8',
+                  'Spring Boot',
+                  'Spring Web MVC',
+                  'Spring Data',
+                  'Hibernate',
+                  'JUnit',
+                  'Guava',
+                  'Jackson',
+                  'slf4j',
+                  'Gradle',
+                  'Mybatis',
+                  'SQL (MySQL)',
+                  'git',
+                  'bash',
+                  'curl',
+                  'netcat',
+                  'Postman',
+                  'Newman',
+                  'IntelliJ',
+                  'Sublime Text'
                 ],
-                "technologies": [
-                  "Erlang R15 & R16",
-                  "Rebar",
-                  "MochiWeb",
-                  "Cowboy",
-                  "WebMachine",
-                  "Meck",
-                  "Emongo",
-                  "REST",
-                  "RTSP",
-                  "DSMCC",
-                  "JSON",
-                  "NoSQL (MongoDB)",
-                  "AMQP (RabbitMQ)",
-                  "Ruby 1.9",
-                  "Ruby on Rails 3.2",
-                  "RVM",
-                  "Bundler",
-                  "Rake",
-                  "Rspec",
-                  "Decent Exposure",
-                  "Mongoid 2",
-                  "git",
-                  "bash",
-                  "yum",
-                  "Jenkins",
-                  "curl",
-                  "Jmeter",
-                  "Java 1.7",
-                  "Sublime Text",
-                  "Eclipse"
-                ],
-                "soft_skills": [
-                  "Gitorious",
-                  "GitHub",
-                  "VersionOne"
+                soft_skills: [
+                  'Pivotal Cloud Foundry',
+                  'Pivotal Tracker',
+                  'Github',
+                  'Jenkins'
                 ]
               },
               {
-                "date_range": {
-                  "start": "2012-09-04",
-                  "end": "2013-01-18"
+                date_range: {
+                  start: '2014-05-12',
+                  end: '2017-02-17'
                 },
-                "company": "Altisource",
-                "title": "Senior Software Engineer",
-                "description": "Developed software involved in migrating backlog data and synchronizing live updates of that data from a legacy database to the new products' MySQL database.",
-                "responsibilities": [
+                company: 'Georgia Tech Research Institute',
+                title: 'Research Scientist',
+                description: "Designed and developed front-end and back-end software for webapps mimicking google's services (mail, drive, etc.) but focusing on security.",
+                responsibilities: [],
+                achievements: [
+                  'Met aggressive deadlines on a very late project',
+                  'Created the first unit tests for that project',
+                  'Researched and implemented significant parts of an SMTP & IMAP server for a proof of concept in under a month'
                 ],
-                "achievements": [
-                  "Added the first true unit tests",
-                  "Cleaned up integration tests",
-                  "Optimized and cleaned up the build",
-                  "Prepared the project for CI (Bamboo)",
-                  "Corrected anti-patterns throughout the project (and a few bugs)",
-                  "Cleaned up tons of compiler warnings",
-                  "Changed the process of developers running locally (and running integration tests) against a shared database to everyone running against their own local instance of MySQL"
+                technologies: [
+                  'Javascript',
+                  'AngularJS 1.2-1.5',
+                  'Angular Material',
+                  'UI Bootstap',
+                  'LESS (CSS)',
+                  'RequireJS',
+                  'Java 1.7',
+                  'JEE',
+                  'JUnit',
+                  'TestNG',
+                  'Groovy',
+                  'Spock',
+                  'Gradle',
+                  'Gulp',
+                  'Maven',
+                  'SELinux',
+                  'TypeSafe Config',
+                  'Guava',
+                  'Guice',
+                  'Jackson',
+                  'JAX-RS (Jersey)',
+                  'Spring Web MVC',
+                  'REST',
+                  'JSON',
+                  'slf4j',
+                  'Tuckey UrlRewriteFilter',
+                  'JasmineJS',
+                  'Metrics (Dropwizard)',
+                  'AMQP (Apache Qpid)',
+                  'SQL (Oracle)',
+                  'PL/SQL',
+                  'git',
+                  'NodeJS',
+                  'SMTP',
+                  'IMAP',
+                  'WireShark',
+                  'iptables',
+                  'bash',
+                  'curl',
+                  'telnet',
+                  'netcat',
+                  'Jmeter',
+                  'IntelliJ',
+                  'Sublime Text',
+                  'RHEL'
                 ],
-                "technologies": [
-                  "Java 1.7",
-                  "Mockito",
-                  "Mybatis",
-                  "Spring Integration",
-                  "Spring REST Client",
-                  "Groovy",
-                  "JSON",
-                  "Maven 3",
-                  "SQL (MySQL)",
-                  "git",
-                  "rpm",
-                  "Chef",
-                  "AMQP (RabbitMQ)",
-                  "Metrics (Yammer)",
-                  "Eclipse"
-                ],
-                "soft_skills": [
-                  "Bamboo",
-                  "Fisheye",
-                  "Confluence",
-                  "JIRA"
+                soft_skills: [
+                  'Confluence',
+                  'Stash/BitBucket',
+                  'Jenkins',
+                  'Bamboo',
+                  'Jira'
                 ]
               },
               {
-                "date_range": {
-                  "start": "2008-02-12",
-                  "end": "2012-08-31"
+                date_range: {
+                  start: '2013-02-04',
+                  end: '2014-05-09'
                 },
-                "company": "MModal (formerly MedQuist)",
-                "title": "Software Architect",
-                "description": "Architected, designed, and developed software for medical transcription services. Used various technologies including EJB, Hibernate, Spring, etc.",
-                "responsibilities": [
+                company: 'Ericsson',
+                title: 'Senior Software Engineer',
+                description: 'Developed back-end software that supports many aspects of Video On Demand.  This included rentals, bookmarks, setup and teardown of HTTP / RTSP / DSMCC sessions, generating URLs for CDNs, applying concurrency restrictions, authenticating requests, saving statistics, and issuing alerts.',
+                responsibilities: [],
+                achievements: [
+                  'Created scripts and wiki pages for consistent dev deployment steps',
+                  'Created the first automated smoke/integration tests',
+                  'Helped build tools for QA to leverage when writing automated tests (sdk wrapper for auth testing, tweaked the RTSP Jmeter plugin, created a CDN simulator, created a DSMCC Jmeter plugin)',
+                  'Fixed the CI configuration (adjusted nightly builds, turned on running of unit tests, etc.)',
+                  'Cleaned up code in various modules'
                 ],
-                "achievements": [
-                  "Set up Splunk to index logs and email alerts for errors in dev, QA, and PT",
-                  "Refactored many pieces of legacy JDBC and stored procedure code to use Spring JdbcTemplate and JPA Entities",
-                  "Ported over a series of DB scripts to create a schema from scratch from 1 project to another so I could have a repeatable fresh environment separate from our shared dev environment (there was only the shared dev environment to test on for this project)",
+                technologies: [
+                  'Erlang R15-R16',
+                  'Rebar',
+                  'MochiWeb',
+                  'Cowboy',
+                  'WebMachine',
+                  'Meck',
+                  'Emongo',
+                  'REST',
+                  'RTSP',
+                  'DSMCC',
+                  'JSON',
+                  'NoSQL (MongoDB)',
+                  'AMQP (RabbitMQ)',
+                  'Ruby 1.9',
+                  'Ruby on Rails 3.2',
+                  'RVM',
+                  'Bundler',
+                  'Rake',
+                  'Rspec',
+                  'Decent Exposure',
+                  'Mongoid 2',
+                  'git',
+                  'bash',
+                  'yum',
+                  'Jenkins',
+                  'curl',
+                  'Jmeter',
+                  'Java 1.7',
+                  'Sublime Text',
+                  'Eclipse'
+                ],
+                soft_skills: [
+                  'Gitorious',
+                  'GitHub',
+                  'VersionOne'
+                ]
+              },
+              {
+                date_range: {
+                  start: '2012-09-04',
+                  end: '2013-01-18'
+                },
+                company: 'Altisource',
+                title: 'Senior Software Engineer',
+                description: "Developed software involved in migrating backlog data and synchronizing live updates of that data from a legacy database to the new products' MySQL database.",
+                responsibilities: [],
+                achievements: [
+                  'Added the first true unit tests',
+                  'Cleaned up integration tests',
+                  'Optimized and cleaned up the build',
+                  'Prepared the project for CI (Bamboo)',
+                  'Corrected anti-patterns throughout the project (and a few bugs)',
+                  'Cleaned up tons of compiler warnings',
+                  'Changed the process of developers running locally (and running integration tests) against a shared database to everyone running against their own local instance of MySQL'
+                ],
+                technologies: [
+                  'Java 1.7',
+                  'Mockito',
+                  'Mybatis',
+                  'Spring Integration',
+                  'Spring REST Client',
+                  'Groovy',
+                  'JSON',
+                  'Maven 3',
+                  'SQL (MySQL)',
+                  'git',
+                  'rpm',
+                  'Chef',
+                  'AMQP (RabbitMQ)',
+                  'Metrics (Yammer)',
+                  'Eclipse'
+                ],
+                soft_skills: [
+                  'Bamboo',
+                  'Fisheye',
+                  'Confluence',
+                  'Jira'
+                ]
+              },
+              {
+                date_range: {
+                  start: '2008-02-12',
+                  end: '2012-08-31'
+                },
+                company: 'MModal (formerly MedQuist)',
+                title: 'Software Architect',
+                description: 'Architected, designed, and developed software for medical transcription services. Used various technologies including EJB, Hibernate, Spring, etc.',
+                responsibilities: [],
+                achievements: [
+                  'Set up Splunk to index logs and email alerts for errors in dev, QA, and PT',
+                  'Refactored many pieces of legacy JDBC and stored procedure code to use Spring JdbcTemplate and JPA Entities',
+                  'Ported over a series of DB scripts to create a schema from scratch from 1 project to another so I could have a repeatable fresh environment separate from our shared dev environment (there was only the shared dev environment to test on for this project)',
                   "With Talend Open Studio, I took a month to rewrite an archive and purge solution that took one of our DBAs a year to develop in PL/SQL (and didn't solve all of the requirements)"
                 ],
-                "technologies": [
-                  "Java 1.5 & 1.6",
-                  "Maven 2",
-                  "JMS",
-                  "Apache Struts1",
-                  "PMD",
-                  "JBoss 4.0.5, 4.2, 4.3, & 5.1",
-                  "Tiles",
-                  "Cobertura",
-                  "JMX MBeans",
-                  "JavaScript",
-                  "JUnit 3 & 4",
-                  "PL/SQL",
-                  "Hibernate/JPA",
-                  "EasyMock",
-                  "SQL (Oracle)",
-                  "JDBC",
-                  "Selenium",
-                  "Talend Open Studio",
-                  "slf4j",
-                  "Logging (JDK Logger)",
-                  "SoapUI",
-                  "JProfiler",
-                  "Jaxb",
-                  "AspectJ",
-                  "Oracle Coherence (as a 2nd level cache for Hibernate)",
-                  "Groovy",
-                  "Velocity Templates",
-                  "EJB2 (Stateless Session)",
-                  "sed/awk",
-                  "Bash Scripting",
-                  "EJB3 (JTA, Stateless Session, MDBs, Interceptors)",
-                  "Splunk 3 & 4",
-                  "Batch Scripting",
-                  "J2EE (JSP, Custom Taglibs, Servlets)",
-                  "XML (DOM, XSLT, Xpath, Xquery)",
+                technologies: [
+                  'Java 1.5-1.6',
+                  'Maven 2',
+                  'JMS',
+                  'Apache Struts1',
+                  'PMD',
+                  'JBoss 4.0-5.1',
+                  'Tiles',
+                  'Cobertura',
+                  'JMX MBeans',
+                  'JavaScript',
+                  'JUnit 3 & 4',
+                  'PL/SQL',
+                  'Hibernate/JPA',
+                  'EasyMock',
+                  'SQL (Oracle)',
+                  'JDBC',
+                  'Selenium',
+                  'Talend Open Studio',
+                  'slf4j',
+                  'Logging (JDK Logger)',
+                  'SoapUI',
+                  'JProfiler',
+                  'Jaxb',
+                  'AspectJ',
+                  'Oracle Coherence (as a 2nd level cache for Hibernate)',
+                  'Groovy',
+                  'Velocity Templates',
+                  'EJB2 (Stateless Session)',
+                  'sed/awk',
+                  'Bash Scripting',
+                  'EJB3 (JTA, Stateless Session, MDBs, Interceptors)',
+                  'Splunk 3 & 4',
+                  'Batch Scripting',
+                  'J2EE (JSP, Custom Taglibs, Servlets)',
+                  'XML (DOM, XSLT, Xpath, Xquery)',
                   "OSB (Oracle Service Bus - Oracle's ESB)",
-                  "Python/IronPython/Jython",
-                  "Spring Framework (core, tx, ws, jdbc, webmvc)",
-                  "C# (consumed our webservices by writing test apps in C#)",
-                  "Eclipse"
+                  'Python/IronPython/Jython',
+                  'Spring Framework (core, tx, ws, jdbc, webmvc)',
+                  'C# (consumed our webservices by writing test apps in C#)',
+                  'Eclipse'
                 ],
-                "soft_skills": [
+                soft_skills: [
+                  'ClearCase',
+                  'ClearQuest',
+                  'Mercurial',
+                  'MediaWiki',
+                  'Hudson',
+                  'Jenkins'
                 ]
               },
               {
-                "date_range": {
-                  "start": "2007-08-01",
-                  "end": "2008-02-11"
+                date_range: {
+                  start: '2007-08-01',
+                  end: '2008-02-11'
                 },
-                "company": "Guru Software Services",
-                "title": "Software Engineer - Lead Developer",
-                "description": "I was the Lead Developer in the U.S. I interfaced with customers and managed an outsource team in India. I primarily developed in J2EE technologies with Eclipse. I used Spring Framework for dependency injection, Apache Commons for logging, and Hibernate for Object-Relational Mapping. I created and maintained webapps with JSP that were tested in Apache Tomcat and wrote the Ant build files for deployment (in both Windows and Linux environment). I also researched the control of scanners with JTwain and the re-writing of a TWAIN wrapper for Java.",
-                "responsibilities": [
-                  "Gather requirements from customer and fine tuned these requirements in daily/weekly meetings",
-                  "Design interfaces and create associated documentation (screen shots & storyboards)",
-                  "Oversee the functionality & development of the user interface",
-                  "Design the implementation and create the design documents (UML)",
-                  "Estimate the initial time bids for projects",
-                  "Communicate the requirements to the outsource team in India",
-                  "Code review (and intervene when problems arise)",
-                  "Q/A test in both Windows and Linux environments",
-                  "Customer acceptance test and make any required modifications to the project"
+                company: 'Guru Software Services',
+                title: 'Software Engineer - Lead Developer',
+                description: 'I was the Lead Developer in the U.S. I interfaced with customers and managed an outsource team in India. I primarily developed in J2EE technologies with Eclipse. I used Spring Framework for dependency injection, Apache Commons for logging, and Hibernate for Object-Relational Mapping. I created and maintained webapps with JSP that were tested in Apache Tomcat and wrote the Ant build files for deployment (in both Windows and Linux environment). I also researched the control of scanners with JTwain and the re-writing of a TWAIN wrapper for Java.',
+                responsibilities: [
+                  'Gather requirements from customer and fine tuned these requirements in daily/weekly meetings',
+                  'Design interfaces and create associated documentation (screen shots & storyboards)',
+                  'Oversee the functionality & development of the user interface',
+                  'Design the implementation and create the design documents (UML)',
+                  'Estimate the initial time bids for projects',
+                  'Communicate the requirements to the outsource team in India',
+                  'Code review (and intervene when problems arise)',
+                  'Q/A test in both Windows and Linux environments',
+                  'Customer acceptance test and make any required modifications to the project'
                 ],
-                "achievements": [
+                achievements: [],
+                technologies: [
+                  'Java 1.4',
+                  'J2EE',
+                  'Apache Commons Logging (log4j)',
+                  'JTwain/TWAIN',
+                  'Spring Framework',
+                  'Apache Ant',
+                  'JNI',
+                  'Hibernate',
+                  'Apache Tomcat',
+                  'HTML',
+                  'CSS',
+                  'JSP'
                 ],
-                "technologies": [
-                  "Java 1.4",
-                  "J2EE",
-                  "Apache Commons Logging (log4j)",
-                  "JTwain/TWAIN",
-                  "Spring Framework",
-                  "Apache Ant",
-                  "JNI",
-                  "Hibernate",
-                  "Apache Tomcat",
-                  "HTML",
-                  "CSS",
-                  "JSP"
-                ],
-                "soft_skills": [
-                ]
+                soft_skills: []
               },
               {
-                "date_range": {
-                  "start": "2007-05-21",
-                  "end": "2007-07-31"
+                date_range: {
+                  start: '2007-05-21',
+                  end: '2007-07-31'
                 },
-                "company": "Guru Software Services (via Georgia Tech)",
-                "title": "Software Engineer - Team Lead",
-                "description": "I was the Team Lead in the development of the Rates Management Module of the Logi-soft software. We created a JSP webapp for managing shipping rates and calculating estimates for trucking costs. We used Hibernate for ORM and tested in Tomcat. In addition to developing the JSP pages and Hibernate code, I personally setup and managed a CVS repository as well as wrote the Ant build file and handled the deployment and delivery of the module to Guru Software Services.",
-                "responsibilities": [
+                company: 'Guru Software Services (via Georgia Tech)',
+                title: 'Software Engineer - Team Lead',
+                description: 'I was the Team Lead in the development of the Rates Management Module of the Logi-soft software. We created a JSP webapp for managing shipping rates and calculating estimates for trucking costs. We used Hibernate for ORM and tested in Tomcat. In addition to developing the JSP pages and Hibernate code, I personally setup and managed a CVS repository as well as wrote the Ant build file and handled the deployment and delivery of the module to Guru Software Services.',
+                responsibilities: [],
+                achievements: [],
+                technologies: [
+                  'Java 1.4',
+                  'J2EE',
+                  'Apache Ant',
+                  'Hibernate',
+                  'Apache Tomcat',
+                  'HTML',
+                  'CSS',
+                  'JSP'
                 ],
-                "achievements": [
-                ],
-                "technologies": [
-                  "Java 1.4",
-                  "J2EE",
-                  "Apache Ant",
-                  "Hibernate",
-                  "Apache Tomcat",
-                  "HTML",
-                  "CSS",
-                  "JSP"
-                ],
-                "soft_skills": [
-                ]
+                soft_skills: []
               }
             ],
-            "hobbies": {
-              "description": "Almost all of my hobbies are centered around computers and technology. If the Zombie Apocalypse ever comes, I'm in trouble.",
-              "hobbies": [
-                "JavaScript",
-                "KnockoutJS",
-                "NodeJS (Express, Mongoose)",
-                "Python",
-                "Groovy",
-                "Grails",
-                "Raspberry Pi",
-                "Perl",
-                "Ruby",
-                "Rails",
-                "Clojure",
-                "YAWS",
-                "C",
-                "C++",
-                "Qt",
-                "GTK+",
-                "Arduino",
-                "Objective-C",
-                "Smalltalk",
-                "MongoDB",
-                "ANTLR",
-                "Lex & Yacc",
-                "Debian",
-                "FreeBSD",
-                "Lua",
-                "WebRTC",
-                "HTML5 (Canvas, LocalStorage, WebSocket, WebWorker)",
-                "Elixir",
-                "Homebrewing (beer, mead, cider)"
-              ]
-            },
-            "education": [
+            education: [
               {
-                "degree": "B.S. in Computer Science",
-                "school_name": "Georgia Institute of Technology",
-                "graduation_date": 1197897000000, /* December 2007 */
-                "gpa": 3.05,
-                "major_gpa": 3.44
+                degree: 'B.S. in Computer Science',
+                school_name: 'Georgia Institute of Technology',
+                graduation_date: '2007-12-17',
+                gpa: 3.05,
+                major_gpa: 3.44
               }
             ]
           }
@@ -1100,7 +1174,7 @@
 
     </div>
 
-    <div id="hobbies">
+    <div id="hobbies" ng-if="resume.hobbies">
       <h2 class="section">
         Hobbies
       </h2>
