@@ -53,6 +53,12 @@
       (function (window) {
         'use strict';
 
+        var urlParams = new URLSearchParams(window.location.search);
+        var includes = urlParams.get('includes');
+        var excludes = urlParams.get('excludes');
+        window.includes = includes ? includes.split(',') : [];
+        window.excludes = excludes ? excludes.split(',') : [];
+
         /*
          * This will eventually go in a DB (probably MongoDB) and I would stand up a REST endpoint
          * to retrieve it (and probably modify too).  I could then choose how I would represent
@@ -131,65 +137,71 @@
                   'Helped design and implement data warehousing for reports against the prod database that were slow and taxing'
                 ],
                 technologies: [
-                  'golang 1.16-1.21',
-                  'sirupsen/logrus',
-                  'gin-gonic/gin',
-                  'gorrilla/mux',
-                  'go-redis',
-                  'aws-sdk-go (v1-v2)',
-                  'go-playground/validator/v10',
-                  'auth0/go-jwt-middleware',
-                  'form3tech-oss/jwt-go',
-                  'golang-jwt/jwt',
-                  'pkg/errors',
-                  'stretchr/testify',
-                  'jmoiron/sqlx',
-                  'uptrace/bun',
-                  'kelseyhightower/envconfig',
-                  'prometheus/client_golang',
-                  'python (2.7, 3.10)',
-                  'nodejs (12-20)',
-                  'typescript (4.6-4.8)',
-                  'jest',
-                  'superagent',
-                  'fetch',
-                  'ioredis',
-                  'winston',
-                  'inversify',
-                  'p-map',
-                  'p-settle',
-                  'lodash',
-                  'massivejs',
-                  'AWS S3',
-                  'AWS SQS/SNS',
-                  'AWS DynamoDB',
-                  'AWS RDS (SQL/Postgres)',
-                  'AWS Elasticache (redis)',
-                  'AWS OpenSearch (ElasticSearch)',
-                  'AWS EKS (Kubernetes)',
-                  'AWS Lambda',
-                  'AWS CloudWatch',
-                  'Docker',
-                  'Grafana',
-                  'Prometheus',
-                  'Helm Charts',
-                  'Terraform',
-                  'DataDog',
-                  'LogDNA',
-                  'gRPC',
-                  'REST',
-                  'WebSockets',
-                  'Postman',
-                  'curl',
-                  'git'
+                  {text: 'golang 1.16-1.21', labels: ['golang']},
+                  {text: 'sirupsen/logrus', labels: ['golang', 'logging']},
+                  {text: 'gin-gonic/gin', labels: ['golang', 'rest', 'http', 'networking']},
+                  {text: 'gorrilla/mux', labels: ['golang', 'rest', 'http', 'networking']},
+                  {text: 'go-redis', labels: ['golang', 'redis', 'nosql', 'cloud']},
+                  {text: 'aws-sdk-go (v1-v2)', labels: ['golang', 'aws', 'cloud']},
+                  {text: 'go-playground/validator/v10', labels: ['golang']},
+                  {text: 'auth0/go-jwt-middleware', labels: ['golang', 'jwt', 'oauth2']},
+                  {text: 'form3tech-oss/jwt-go', labels: ['golang', 'jwt']},
+                  {text: 'golang-jwt/jwt', labels: ['golang', 'jwt']},
+                  {text: 'pkg/errors', labels: ['golang']},
+                  {text: 'stretchr/testify', labels: ['golang', 'testing', 'unit-tests']},
+                  {text: 'jmoiron/sqlx', labels: ['golang', 'sql', 'postgresql']},
+                  {text: 'uptrace/bun', labels: ['golang', 'orm', 'sql', 'postgresql']},
+                  {text: 'kelseyhightower/envconfig', labels: ['golang']},
+                  {text: 'prometheus/client_golang', labels: ['golang', 'metrics', 'cloud']},
+                  {text: 'python (2.7, 3.10)', labels: ['python']},
+                  {text: 'scala (2.11.8)', labels: ['scala']},
+                  {text: 'nodejs (12-20)', labels: ['nodejs', 'javascript', 'typescript']},
+                  {text: 'npm', labels: ['nodejs', 'javascript', 'typescript', 'build-tools']},
+                  {text: 'expressjs', labels: ['nodejs', 'javascript', 'typescript', 'rest', 'http', 'networking']},
+                  {text: 'typescript (4.6-4.8)', labels: ['nodejs', 'javascript', 'typescript']},
+                  {text: 'jest', labels: ['nodejs', 'javascript', 'typescript', 'testing', 'unit-tests']},
+                  {text: 'mocha', labels: ['nodejs', 'javascript', 'typescript', 'testing', 'unit-tests']},
+                  {text: 'chai', labels: ['nodejs', 'javascript', 'typescript', 'testing', 'unit-tests']},
+                  {text: 'superagent', labels: ['nodejs', 'javascript', 'typescript', 'rest', 'http', 'networking']},
+                  {text: 'fetch', labels: ['nodejs', 'javascript', 'typescript', 'rest', 'http', 'networking']},
+                  {text: 'ioredis', labels: ['nodejs', 'javascript', 'typescript', 'redis', 'nosql', 'cloud']},
+                  {text: 'winston', labels: ['nodejs', 'javascript', 'typescript', 'logging']},
+                  {text: 'inversify', labels: ['nodejs', 'javascript', 'typescript', 'dependency-injection']},
+                  {text: 'p-map', labels: ['nodejs', 'javascript', 'typescript']},
+                  {text: 'p-settle', labels: ['nodejs', 'javascript', 'typescript']},
+                  {text: 'lodash', labels: ['nodejs', 'javascript', 'typescript']},
+                  {text: 'massivejs', labels: ['nodejs', 'javascript', 'typescript', 'sql', 'postgresql']},
+                  {text: 'AWS S3', labels: ['aws', 'cloud']},
+                  {text: 'AWS SQS/SNS', labels: ['aws', 'cloud', 'pub-sub']},
+                  {text: 'AWS DynamoDB', labels: ['aws', 'cloud', 'dynamodb', 'nosql']},
+                  {text: 'AWS RDS (SQL/Postgres)', labels: ['aws', 'cloud', 'sql', 'postgresql']},
+                  {text: 'AWS Elasticache (redis)', labels: ['aws', 'cloud', 'redis', 'nosql']},
+                  {text: 'AWS OpenSearch (ElasticSearch)', labels: ['aws', 'cloud', 'elastic-search', 'nosql']},
+                  {text: 'AWS EKS (Kubernetes)', labels: ['aws', 'cloud', 'docker', 'kubernetes']},
+                  {text: 'AWS Lambda', labels: ['aws', 'cloud', 'nodejs', 'javascript', 'typescript']},
+                  {text: 'AWS CloudWatch', labels: ['aws', 'cloud', 'logging', 'metrics']},
+                  {text: 'Docker', labels: ['docker', 'cloud']},
+                  {text: 'Grafana', labels: ['metrics', 'cloud']},
+                  {text: 'Prometheus', labels: ['metrics', 'cloud']},
+                  {text: 'Helm Charts', labels: ['docker', 'cloud', 'kubernetes']},
+                  {text: 'Terraform', labels: ['infrastructure', 'cloud', 'aws']},
+                  {text: 'DataDog', labels: ['logging', 'cloud']},
+                  {text: 'LogDNA', labels: ['logging', 'cloud']},
+                  {text: 'gRPC', labels: ['golang', 'networking']},
+                  {text: 'REST', labels: ['rest', 'http', 'networking']},
+                  {text: 'WebSockets', labels: ['websockets', 'networking']},
+                  {text: 'Postman', labels: ['testing', 'rest', 'http', 'networking', 'websockets']},
+                  {text: 'curl', labels: ['testing', 'rest', 'http', 'networking', 'scripting']},
+                  {text: 'bash', labels: ['scripting']},
+                  {text: 'git', labels: ['git', 'source-control', 'scripting']}
                 ],
                 soft_skills: [
-                  'VS Code',
-                  'Sublime Text',
-                  'GitHub',
-                  'Jenkins',
-                  'Confluence',
-                  'Jira'
+                  {text: 'VS Code', labels: ['editor', 'golang', 'javascript', 'typescript']},
+                  {text: 'Sublime Text', labels: ['editor', 'javascript', 'typescript']},
+                  {text: 'GitHub', labels: ['git', 'source-control']},
+                  {text: 'Jenkins', labels: ['ci', 'cd', 'build-tools']},
+                  {text: 'Confluence', labels: ['wiki']},
+                  {text: 'Jira', labels: ['ticketing']}
                 ]
               },
               {
@@ -203,23 +215,23 @@
                 responsibilities: [],
                 achievements: [],
                 technologies: [
-                  'Scala 2.12',
-                  'Play',
-                  'Hibernate',
-                  'MySQL',
-                  'MongoDB',
-                  'JavaScript',
-                  'Docker',
-                  'Bash',
-                  'Git',
+                  {text: 'Scala (2.12)', labels: ['scala']},
+                  {text: 'Play', labels: ['scala', 'build-tools']},
+                  {text: 'Hibernate', labels: ['scala', 'orm', 'sql', 'mysql']},
+                  {text: 'MySQL', labels: ['sql', 'mysql']},
+                  {text: 'MongoDB', labels: ['nosql', 'mongodb']},
+                  {text: 'JavaScript', labels: ['javascript', 'web', 'front-end']},
+                  {text: 'Docker', labels: ['docker']},
+                  {text: 'Bash', labels: ['scripting']},
+                  {text: 'Git', labels: ['git', 'source-control', 'scripting']}
                 ],
                 soft_skills: [
-                  'Jenkins',
-                  'Jira',
-                  'IntelliJ',
-                  'Kibana',
-                  'Github',
-                  'Sublime Text',
+                  {text: 'Jenkins', labels: ['ci', 'cd', 'build-tools']},
+                  {text: 'Jira', labels: ['ticketing']},
+                  {text: 'IntelliJ', labels: ['editor', 'javascript', 'scala']},
+                  {text: 'Kibana', labels: ['cloud', 'logging', 'elastic-search']},
+                  {text: 'Github', labels: ['git', 'source-control']},
+                  {text: 'Sublime Text', labels: ['editor', 'javascript', 'scala']},
                 ]
               },
               {
@@ -238,44 +250,52 @@
                   'Wrote many mock backends and simple test connectors in NodeJS to help developers/QA/management test and to help Sales demo the product'
                 ],
                 technologies: [
-                  'JavaScript',
-                  'NodeJS',
-                  'ExpressJS',
-                  'Mocha',
-                  'Chai',
-                  'ElectronJS',
-                  'HandlebarsJS',
-                  'Gulp',
-                  'Java 8-14',
-                  'Spring',
-                  'RxJava',
-                  'Hibernate',
-                  'JUnit',
-                  'Guava',
-                  'Jackson',
-                  'slf4j',
-                  'Maven',
-                  'HAL',
-                  'SQL (PostgreSQL)',
-                  'NoSQL (Redis)',
-                  'OAuth2',
-                  'JWT',
-                  'git',
-                  'bash',
-                  'curl',
-                  'Postman',
-                  'IntelliJ',
-                  'Sublime Text'
+                  {text: 'JavaScript', labels: ['javascript']},
+                  {text: 'NodeJS (v4-v8)', labels: ['nodejs', 'javascript']},
+                  {text: 'NPM', labels: ['nodejs', 'javascript', 'build-tools']},
+                  {text: 'ExpressJS', labels: ['nodejs', 'javascript', 'rest', 'http', 'networking']},
+                  {text: 'Mocha', labels: ['nodejs', 'javascript', 'testing', 'unit-tests']},
+                  {text: 'Chai', labels: ['nodejs', 'javascript', 'testing', 'unit-tests']},
+                  {text: 'ElectronJS', labels: ['nodejs', 'javascript', 'front-end']},
+                  {text: 'HandlebarsJS', labels: ['javascript', 'templating']},
+                  {text: 'Gulp', labels: ['nodejs', 'javascript', 'build-tools']},
+                  {text: 'Swift', labels: ['swift', 'front-end']},
+                  {text: 'Java 8-14', labels: ['java']},
+                  {text: 'Spring Boot', labels: ['java', 'dependency-injection', 'spring', 'rest', 'http', 'networking']},
+                  {text: 'RxJava', labels: ['java']},
+                  {text: 'Hibernate', labels: ['java', 'sql', 'postgresql', 'orm']},
+                  {text: 'JUnit', labels: ['java', 'testing', 'unit-tests']},
+                  {text: 'Guava', labels: ['java']},
+                  {text: 'Jackson', labels: ['java', 'json', 'xml']},
+                  {text: 'slf4j', labels: ['java', 'logging']},
+                  {text: 'Maven', labels: ['java', 'build-tools']},
+                  {text: 'HAL', labels: ['json', 'rest', 'http']},
+                  {text: 'NoSQL (Redis)', labels: ['redis', 'nosql']},
+                  {text: 'OAuth2/OpenIDConnect', labels: ['authn', 'authz']},
+                  {text: 'JWT', labels: ['jwt', 'json', 'authn']},
+                  {text: 'git', labels: ['git', 'source-control', 'scripting']},
+                  {text: 'bash', labels: ['scripting']},
+                  {text: 'curl', labels: ['testing', 'rest', 'http', 'networking', 'scripting']},
+                  {text: 'Postman', labels: ['testing', 'rest', 'http', 'networking']},
+                  {text: 'AWS RDS (SQL/Postgres)', labels: ['aws', 'cloud', 'sql', 'postgresql']},
+                  {text: 'AWS Elasticache (redis)', labels: ['aws', 'cloud', 'redis', 'nosql']},
+                  {text: 'AWS EC2', labels: ['aws', 'cloud', 'infrastructure']},
+                  {text: 'AWS ECS', labels: ['aws', 'cloud', 'docker']},
+                  {text: 'AWS Fargate', labels: ['aws', 'cloud', 'infrastructure']},
+                  {text: 'AWS CloudFormation', labels: ['aws', 'cloud', 'infrastructure']},
+                  {text: 'AWS Lambda', labels: ['aws', 'cloud', 'lambda', 'serverless']},
+                  {text: 'AWS CloudWatch', labels: ['aws', 'cloud', 'logging', 'metrics']}
                 ],
                 soft_skills: [
-                  'AWS',
-                  'Kibana',
-                  'AWS CloudWatch',
-                  'Bitbucket',
-                  'Confluence',
-                  'Jira',
-                  'Github',
-                  'Bamboo'
+                  {text: 'Kibana', labels: ['cloud', 'elastic-search', 'logging']},
+                  {text: 'Bitbucket', labels: ['git', 'source-control']},
+                  {text: 'Confluence', labels: ['wiki']},
+                  {text: 'Jira', labels: ['ticketing']},
+                  {text: 'Github', labels: ['git', 'source-control']},
+                  {text: 'Bamboo', labels: ['ci', 'cd', 'build-tools']},
+                  {text: 'IntelliJ', labels: ['editor', 'java']},
+                  {text: 'XCode', labels: ['editor', 'swift']},
+                  {text: 'Sublime Text', labels: ['editor', 'javascript']}
                 ]
               },
               {
@@ -291,40 +311,39 @@
                   'Quickly ramped up on domain and project knowledge'
                 ],
                 technologies: [
-                  'Javascript',
-                  'AngularJS 1.5',
-                  'Angular Material',
-                  'Sass (CSS)',
-                  'JasmineJS',
-                  'Protractor',
-                  'NodeJS',
-                  'Gulp',
-                  'Java 1.8',
-                  'Spring Boot',
-                  'Spring Web MVC',
-                  'Spring Data',
-                  'Hibernate',
-                  'JUnit',
-                  'Guava',
-                  'Jackson',
-                  'slf4j',
-                  'Gradle',
-                  'Mybatis',
-                  'SQL (MySQL)',
-                  'git',
-                  'bash',
-                  'curl',
-                  'netcat',
-                  'Postman',
-                  'Newman',
-                  'IntelliJ',
-                  'Sublime Text'
+                  {text: 'Javascript', labels: ['javascript', 'web', 'front-end']},
+                  {text: 'AngularJS 1.5', labels: ['javascript', 'angular', 'web', 'front-end', 'templating', 'dependency-injection']},
+                  {text: 'Angular Material', labels: ['javascript', 'angular', 'web', 'front-end']},
+                  {text: 'Sass (CSS)', labels: ['css', 'web', 'front-end']},
+                  {text: 'JasmineJS', labels: ['javascript', 'testing', 'unit-tests']},
+                  {text: 'Protractor', labels: ['javascript', 'testing', 'e2e-tests', 'angular']},
+                  {text: 'NodeJS', labels: ['nodejs', 'javascript']},
+                  {text: 'NPM', labels: ['nodejs', 'javascript', 'build-tools']},
+                  {text: 'Gulp', labels: ['nodejs', 'javascript', 'build-tools']},
+                  {text: 'Java 1.8', labels: ['java']},
+                  {text: 'Spring Boot', labels: ['java', 'dependency-injection', 'spring', 'rest', 'http', 'networking']},
+                  {text: 'Hibernate', labels: ['java', 'sql', 'mysql', 'orm']},
+                  {text: 'JUnit', labels: ['java', 'testing', 'unit-tests']},
+                  {text: 'Guava', labels: ['java']},
+                  {text: 'Jackson', labels: ['java', 'json']},
+                  {text: 'slf4j', labels: ['java', 'logging']},
+                  {text: 'Gradle', labels: ['java', 'groovy', 'build-tools']},
+                  {text: 'Mybatis', labels: ['java', 'sql', 'mysql', 'orm']},
+                  {text: 'SQL (MySQL)', labels: ['sql', 'mysql']},
+                  {text: 'git', labels: ['git', 'source-control']},
+                  {text: 'bash', labels: ['scripting']},
+                  {text: 'curl', labels: ['testing', 'rest', 'http', 'networking', 'scripting']},
+                  {text: 'netcat', labels: ['testing', 'networking']},
+                  {text: 'Postman', labels: ['testing', 'rest', 'http', 'networking']},
+                  {text: 'Newman', labels: ['testing', 'rest', 'http', 'networking', 'integration-tests']}
                 ],
                 soft_skills: [
-                  'Pivotal Cloud Foundry',
-                  'Pivotal Tracker',
-                  'Github',
-                  'Jenkins'
+                  {text: 'Pivotal Cloud Foundry', labels: ['cloud']},
+                  {text: 'Pivotal Tracker', labels: ['ticketing']},
+                  {text: 'Github', labels: ['git', 'source-control']},
+                  {text: 'Jenkins', labels: ['ci', 'cd', 'build-tools']},
+                  {text: 'IntelliJ', labels: ['editor', 'java']},
+                  {text: 'Sublime Text', labels: ['editor', 'javascript']}
                 ]
               },
               {
@@ -342,58 +361,58 @@
                   'Researched and implemented significant parts of an SMTP & IMAP server for a proof of concept in under a month'
                 ],
                 technologies: [
-                  'Javascript',
-                  'AngularJS 1.2-1.5',
-                  'Angular Material',
-                  'UI Bootstap',
-                  'LESS (CSS)',
-                  'RequireJS',
-                  'Java 1.7',
-                  'JEE',
-                  'JUnit',
-                  'TestNG',
-                  'Groovy',
-                  'Spock',
-                  'Gradle',
-                  'Gulp',
-                  'Maven',
-                  'SELinux',
-                  'TypeSafe Config',
-                  'Guava',
-                  'Guice',
-                  'Jackson',
-                  'JAX-RS (Jersey)',
-                  'Spring Web MVC',
-                  'REST',
-                  'JSON',
-                  'slf4j',
-                  'Tuckey UrlRewriteFilter',
-                  'JasmineJS',
-                  'Metrics (Dropwizard)',
-                  'AMQP (Apache Qpid)',
-                  'SQL (Oracle)',
-                  'PL/SQL',
-                  'git',
-                  'NodeJS',
-                  'SMTP',
-                  'IMAP',
-                  'WireShark',
-                  'iptables',
-                  'bash',
-                  'curl',
-                  'telnet',
-                  'netcat',
-                  'Jmeter',
-                  'IntelliJ',
-                  'Sublime Text',
-                  'RHEL'
+                  {text: 'Javascript', labels: ['javascript', 'web', 'front-end']},
+                  {text: 'AngularJS 1.2-1.5', labels: ['javascript', 'angular', 'web', 'front-end', 'templating', 'dependency-injection']},
+                  {text: 'Angular Material', labels: ['javascript', 'angular', 'web', 'front-end']},
+                  {text: 'UI Bootstap', labels: ['javascript', 'angular', 'web', 'front-end']},
+                  {text: 'LESS (CSS)', labels: ['css', 'web', 'front-end']},
+                  {text: 'RequireJS', labels: ['javascript', 'web', 'front-end']},
+                  {text: 'Java 1.7', labels: ['java']},
+                  {text: 'JEE', labels: ['java', 'templating', 'web', 'http']},
+                  {text: 'JUnit', labels: ['java', 'testing', 'unit-tests']},
+                  {text: 'TestNG', labels: ['java', 'testing', 'unit-tests']},
+                  {text: 'Groovy', labels: ['java', 'groovy', 'testing', 'unit-tests']},
+                  {text: 'Spock', labels: ['java', 'groovy', 'testing', 'unit-tests']},
+                  {text: 'Gradle', labels: ['java', 'groovy', 'build-tools']},
+                  {text: 'Gulp', labels: ['javascript', 'build-tools']},
+                  {text: 'Maven', labels: ['java', 'build-tools']},
+                  {text: 'SELinux', labels: ['linux']},
+                  {text: 'TypeSafe Config', labels: ['java', 'scala']},
+                  {text: 'Guava', labels: ['java']},
+                  {text: 'Guice', labels: ['java', 'dependency-injection']},
+                  {text: 'Jackson', labels: ['java', 'json', 'xml']},
+                  {text: 'JAX-RS (Jersey)', labels: ['java', 'rest', 'http', 'networking']},
+                  {text: 'Spring Web MVC', labels: ['java', 'rest', 'http', 'networking']},
+                  {text: 'REST', labels: ['rest', 'json', 'http', 'networking']},
+                  {text: 'JSON', labels: ['json']},
+                  {text: 'slf4j', labels: ['java', 'logging']},
+                  {text: 'Tuckey UrlRewriteFilter', labels: ['java', 'web', 'http', 'servlets']},
+                  {text: 'JasmineJS', labels: ['javascript', 'testing', 'unit-tests']},
+                  {text: 'Metrics (Dropwizard)', labels: ['java', 'metrics']},
+                  {text: 'AMQP (Apache Qpid)', labels: ['java', 'pub-sub']},
+                  {text: 'SQL (Oracle)', labels: ['sql', 'oracle']},
+                  {text: 'PL/SQL', labels: ['sql', 'oracle']},
+                  {text: 'git', labels: ['git', 'source-control']},
+                  {text: 'NodeJS', labels: ['nodejs', 'javascript']},
+                  {text: 'SMTP', labels: ['mail', 'networking']},
+                  {text: 'IMAP', labels: ['mail', 'networking']},
+                  {text: 'WireShark', labels: ['networking']},
+                  {text: 'iptables', labels: ['networking']},
+                  {text: 'bash', labels: ['scripting']},
+                  {text: 'curl', labels: ['testing', 'rest', 'http', 'networking', 'scripting']},
+                  {text: 'telnet', labels: ['networking']},
+                  {text: 'netcat', labels: ['testing', 'networking']},
+                  {text: 'Jmeter', labels: ['testing', 'rest', 'http', 'networking', 'integration-tests']}
                 ],
                 soft_skills: [
-                  'Confluence',
-                  'Stash/BitBucket',
-                  'Jenkins',
-                  'Bamboo',
-                  'Jira'
+                  {text: 'Confluence', labels: ['wiki']},
+                  {text: 'Stash/BitBucket', labels: ['git', 'source-control']},
+                  {text: 'Jenkins', labels: ['ci', 'build-tools']},
+                  {text: 'Bamboo', labels: ['ci', 'build-tools']},
+                  {text: 'Jira', labels: ['ticketing']},
+                  {text: 'IntelliJ', labels: ['editor', 'java', 'javascript', 'groovy']},
+                  {text: 'Sublime Text', labels: ['editor', 'javascript']},
+                  {text: 'RHEL', labels: ['linux']}
                 ]
               },
               {
@@ -413,41 +432,41 @@
                   'Cleaned up code in various modules'
                 ],
                 technologies: [
-                  'Erlang R15-R16',
-                  'Rebar',
-                  'MochiWeb',
-                  'Cowboy',
-                  'WebMachine',
-                  'Meck',
-                  'Emongo',
-                  'REST',
-                  'RTSP',
-                  'DSMCC',
-                  'JSON',
-                  'NoSQL (MongoDB)',
-                  'AMQP (RabbitMQ)',
-                  'Ruby 1.9',
-                  'Ruby on Rails 3.2',
-                  'RVM',
-                  'Bundler',
-                  'Rake',
-                  'Rspec',
-                  'Decent Exposure',
-                  'Mongoid 2',
-                  'git',
-                  'bash',
-                  'yum',
-                  'Jenkins',
-                  'curl',
-                  'Jmeter',
-                  'Java 1.7',
-                  'Sublime Text',
-                  'Eclipse'
+                  {text: 'Erlang R15-R16', labels: ['erlang']},
+                  {text: 'Rebar', labels: ['erlang', 'build-tools']},
+                  {text: 'MochiWeb', labels: ['erlang', 'rest', 'http', 'networking']},
+                  {text: 'Cowboy', labels: ['erlang', 'rest', 'http', 'networking']},
+                  {text: 'WebMachine', labels: ['erlang', 'rest', 'http', 'networking']},
+                  {text: 'Meck', labels: ['erlang', 'testing', 'unit-tests']},
+                  {text: 'Emongo', labels: ['erlang', 'mongodb', 'nosql']},
+                  {text: 'REST', labels: ['rest', 'json', 'http', 'networking']},
+                  {text: 'RTSP', labels: ['networking']},
+                  {text: 'DSMCC', labels: ['networking']},
+                  {text: 'JSON', labels: ['json']},
+                  {text: 'NoSQL (MongoDB)', labels: ['nosql', 'mongodb']},
+                  {text: 'AMQP (RabbitMQ)', labels: ['pub-sub']},
+                  {text: 'Ruby 1.9', labels: ['ruby']},
+                  {text: 'Ruby on Rails 3.2', labels: ['ruby', 'web', 'rest', 'http', 'templating']},
+                  {text: 'RVM', labels: ['ruby']},
+                  {text: 'Bundler', labels: ['ruby', 'build-tools']},
+                  {text: 'Rake', labels: ['ruby', 'build-tools']},
+                  {text: 'Rspec', labels: ['ruby', 'testing', 'unit-tests']},
+                  {text: 'Decent Exposure', labels: ['ruby', 'rest']},
+                  {text: 'Mongoid 2', labels: ['ruby', 'mongodb', 'orm', 'nosql']},
+                  {text: 'git', labels: ['git', 'source-control']},
+                  {text: 'bash', labels: ['scripting']},
+                  {text: 'yum', labels: ['linux']},
+                  {text: 'curl', labels: ['testing', 'scripting']},
+                  {text: 'Jmeter', labels: ['java', 'testing', 'rest', 'http', 'networking', 'integrations-tests']},
+                  {text: 'Java 1.7', labels: ['java']}
                 ],
                 soft_skills: [
-                  'Gitorious',
-                  'GitHub',
-                  'VersionOne'
+                  {text: 'Gitorious', labels: ['git', 'source-control']},
+                  {text: 'GitHub', labels: ['git', 'source-control']},
+                  {text: 'VersionOne', labels: ['ticketing']},
+                  {text: 'Sublime Text', labels: ['editor', 'ruby', 'erlang']},
+                  {text: 'Jenkins', labels: ['ci', 'build-tools']},
+                  {text: 'Eclipse', labels: ['editor', 'java']}
                 ]
               },
               {
@@ -469,27 +488,27 @@
                   'Changed the process of developers running locally (and running integration tests) against a shared database to everyone running against their own local instance of MySQL'
                 ],
                 technologies: [
-                  'Java 1.7',
-                  'Mockito',
-                  'Mybatis',
-                  'Spring Integration',
-                  'Spring REST Client',
-                  'Groovy',
-                  'JSON',
-                  'Maven 3',
-                  'SQL (MySQL)',
-                  'git',
-                  'rpm',
-                  'Chef',
-                  'AMQP (RabbitMQ)',
-                  'Metrics (Yammer)',
-                  'Eclipse'
+                  {text: 'Java 1.7', labels: ['java']},
+                  {text: 'Mockito', labels: ['java', 'testing', 'unit-tests']},
+                  {text: 'Mybatis', labels: ['java', 'sql', 'mysql', 'orm']},
+                  {text: 'Spring Integration', labels: ['java', 'spring']},
+                  {text: 'Spring REST Client', labels: ['java', 'spring', 'rest', 'http', 'networking']},
+                  {text: 'Groovy', labels: ['java', 'groovy']},
+                  {text: 'JSON', labels: ['json']},
+                  {text: 'Maven 3', labels: ['java', 'build-tools']},
+                  {text: 'SQL (MySQL)', labels: ['sql', 'mysql']},
+                  {text: 'git', labels: ['git', 'source-control']},
+                  {text: 'rpm', labels: ['linux']},
+                  {text: 'Chef', labels: []},
+                  {text: 'AMQP (RabbitMQ)', labels: ['pub-sub']},
+                  {text: 'Metrics (Yammer)', labels: ['java', 'metrics']}
                 ],
                 soft_skills: [
-                  'Bamboo',
-                  'Fisheye',
-                  'Confluence',
-                  'Jira'
+                  {text: 'Bamboo', labels: ['ci', 'build-tools']},
+                  {text: 'Fisheye', labels: ['git', 'source-control']},
+                  {text: 'Confluence', labels: ['wiki']},
+                  {text: 'Jira', labels: ['ticketing']},
+                  {text: 'Eclipse', labels: ['editor', 'java', 'groovy']}
                 ]
               },
               {
@@ -508,54 +527,54 @@
                   "With Talend Open Studio, I took a month to rewrite an archive and purge solution that took one of our DBAs a year to develop in PL/SQL (and didn't solve all of the requirements)"
                 ],
                 technologies: [
-                  'Java 1.5-1.6',
-                  'Maven 2',
-                  'JMS',
-                  'Apache Struts1',
-                  'PMD',
-                  'JBoss 4.0-5.1',
-                  'Tiles',
-                  'Cobertura',
-                  'JMX MBeans',
-                  'JavaScript',
-                  'JUnit 3 & 4',
-                  'PL/SQL',
-                  'Hibernate/JPA',
-                  'EasyMock',
-                  'SQL (Oracle)',
-                  'JDBC',
-                  'Selenium',
-                  'Talend Open Studio',
-                  'slf4j',
-                  'Logging (JDK Logger)',
-                  'SoapUI',
-                  'JProfiler',
-                  'Jaxb',
-                  'AspectJ',
-                  'Oracle Coherence (as a 2nd level cache for Hibernate)',
-                  'Groovy',
-                  'Velocity Templates',
-                  'EJB2 (Stateless Session)',
-                  'sed/awk',
-                  'Bash Scripting',
-                  'EJB3 (JTA, Stateless Session, MDBs, Interceptors)',
-                  'Splunk 3 & 4',
-                  'Batch Scripting',
-                  'J2EE (JSP, Custom Taglibs, Servlets)',
-                  'XML (DOM, XSLT, Xpath, Xquery)',
-                  "OSB (Oracle Service Bus - Oracle's ESB)",
-                  'Python/IronPython/Jython',
-                  'Spring Framework (core, tx, ws, jdbc, webmvc)',
-                  'C# (consumed our webservices by writing test apps in C#)',
-                  'Eclipse'
+                  {text: 'Java 1.5-1.6', labels: ['java']},
+                  {text: 'Maven 2', labels: ['java', 'build-tools']},
+                  {text: 'JMS', labels: ['pub-sub']},
+                  {text: 'Apache Struts 1', labels: ['java', 'web', 'http', 'networking', 'front-end']},
+                  {text: 'PMD', labels: ['java', 'build-tools']},
+                  {text: 'JBoss 4.0-5.1', labels: ['java']},
+                  {text: 'Tiles', labels: ['java', 'web', 'templating', 'front-end']},
+                  {text: 'Cobertura', labels: ['java', 'build-tools']},
+                  {text: 'JMX MBeans', labels: ['java']},
+                  {text: 'JavaScript', labels: ['javascript', 'web', 'front-end']},
+                  {text: 'JUnit 3 & 4', labels: ['java', 'testing', 'unit-tests']},
+                  {text: 'PL/SQL', labels: ['sql', 'oracle']},
+                  {text: 'Hibernate/JPA', labels: ['java', 'sql', 'oracle', 'orm']},
+                  {text: 'EasyMock', labels: ['java', 'testing', 'unit-tests']},
+                  {text: 'SQL (Oracle)', labels: ['sql', 'oracle']},
+                  {text: 'JDBC', labels: ['java', 'sql', 'oracle']},
+                  {text: 'Selenium', labels: ['java', 'testing', 'e2e-tests', 'web']},
+                  {text: 'Talend Open Studio', labels: ['data-warehousing']},
+                  {text: 'slf4j', labels: ['java', 'logging']},
+                  {text: 'Logging (JDK Logger)', labels: ['java', 'logging']},
+                  {text: 'SoapUI', labels: ['testing', 'soap', 'networking']},
+                  {text: 'JProfiler', labels: ['java']},
+                  {text: 'Jaxb', labels: ['java', 'xml']},
+                  {text: 'AspectJ', labels: ['java']},
+                  {text: 'Oracle Coherence (as a 2nd level cache for Hibernate)', labels: ['java']},
+                  {text: 'Groovy', labels: ['java', 'groovy']},
+                  {text: 'Velocity Templates', labels: ['java', 'templating']},
+                  {text: 'EJB2 (Stateless Session)', labels: ['java', 'dependency-injection']},
+                  {text: 'sed/awk', labels: ['scripting']},
+                  {text: 'bash', labels: ['scripting']},
+                  {text: 'EJB3 (JTA, Stateless Session, MDBs, Interceptors)', labels: ['java', 'dependency-injection']},
+                  {text: 'Splunk 3 & 4', labels: ['logging']},
+                  {text: 'Batch Scripting', labels: ['scripting']},
+                  {text: 'J2EE (JSP, Custom Taglibs, Servlets)', labels: ['java', 'web', 'http', 'templating', 'servlets']},
+                  {text: 'XML (DOM, XSLT, Xpath, Xquery)', labels: ['xml']},
+                  {text: "OSB (Oracle Service Bus - Oracle's ESB)", labels: []},
+                  {text: 'Python/IronPython/Jython', labels: ['python']},
+                  {text: 'Spring Framework (core, tx, ws, jdbc, webmvc)', labels: ['java', 'spring', 'sql', 'oracle', 'web', 'http', 'soap', 'dependency-injection']},
+                  {text: 'C# (consumed our webservices by writing test apps in C#)', labels: ['csharp', 'testing']}
                 ],
                 soft_skills: [
-                  'ClearCase',
-                  'ClearQuest',
-                  'Mercurial',
-                  'MediaWiki',
-                  'Hudson',
-                  'Jenkins'
+                  {text: 'ClearCase', labels: ['source-control']},
+                  {text: 'ClearQuest', labels: ['ticketing']},
+                  {text: 'Mercurial', labels: ['source-control']},
+                  {text: 'MediaWiki', labels: ['wiki']},
+                  {text: 'Hudson', labels: ['ci', 'build-tools']},
+                  {text: 'Jenkins', labels: ['ci', 'build-tools']},
+                  {text: 'Eclipse', labels: ['editor', 'java']}
                 ]
               },
               {
@@ -579,18 +598,18 @@
                 ],
                 achievements: [],
                 technologies: [
-                  'Java 1.4',
-                  'J2EE',
-                  'Apache Commons Logging (log4j)',
-                  'JTwain/TWAIN',
-                  'Spring Framework',
-                  'Apache Ant',
-                  'JNI',
-                  'Hibernate',
-                  'Apache Tomcat',
-                  'HTML',
-                  'CSS',
-                  'JSP'
+                  {text: 'Java 1.4', labels: ['java']},
+                  {text: 'J2EE', labels: ['java', 'web']},
+                  {text: 'Apache Commons Logging (log4j)', labels: ['java', 'logging']},
+                  {text: 'JTwain/TWAIN', labels: ['java']},
+                  {text: 'Spring Framework', labels: ['java', 'dependency-injection']},
+                  {text: 'Apache Ant', labels: ['java', 'build-tools']},
+                  {text: 'JNI', labels: ['java']},
+                  {text: 'Hibernate', labels: ['java', 'sql', 'orm']},
+                  {text: 'Apache Tomcat', labels: ['java', 'web']},
+                  {text: 'HTML', labels: ['web', 'front-end']},
+                  {text: 'CSS', labels: ['css', 'web', 'front-end']},
+                  {text: 'JSP', labels: ['java', 'templating', 'web', 'front-end']}
                 ],
                 soft_skills: []
               },
@@ -605,14 +624,14 @@
                 responsibilities: [],
                 achievements: [],
                 technologies: [
-                  'Java 1.4',
-                  'J2EE',
-                  'Apache Ant',
-                  'Hibernate',
-                  'Apache Tomcat',
-                  'HTML',
-                  'CSS',
-                  'JSP'
+                  {text: 'Java 1.4', labels: ['java']},
+                  {text: 'J2EE', labels: ['java', 'web']},
+                  {text: 'Apache Ant', labels: ['java', 'build-tools']},
+                  {text: 'Hibernate', labels: ['java', 'sql', 'orm']},
+                  {text: 'Apache Tomcat', labels: ['java', 'web']},
+                  {text: 'HTML', labels: ['web', 'front-end']},
+                  {text: 'CSS', labels: ['css', 'web', 'front-end']},
+                  {text: 'JSP', labels: ['java', 'templating', 'web', 'front-end']}
                 ],
                 soft_skills: []
               }
@@ -710,6 +729,47 @@
                   multiColumn: '='
                 },
                 templateUrl: 'resume-sub-section.html',
+                link: function (scope, element, attributes) {
+                  /*
+                   * TODO - I should probably find a better way to style this than 2 classes, however,
+                   * 2 flattened out classes is better performance than a more complex CSS selector.
+                   */
+                  if (scope.multiColumn) {
+                    scope.ulClass = 'multi_col_line_items';
+                    scope.liClass = 'multi_col_line_item';
+                  } else {
+                    scope.ulClass = 'single_col_line_items';
+                    scope.liClass = 'single_col_line_item';
+                  }
+                }
+              };
+            }
+          ]
+        );
+
+        /**
+         * @ngdoc directive
+         * @param {string} label the label for the skill-list's header
+         * @param {array} items the items to display in the skill-list
+         * @param {boolean} multiColumn whether to display the list of items in multiple columns or not
+         * @param {array} includes the names of topics/labels to include
+         * @param {array} excludes the names of topics/labels to exclude
+         * @description Use this directive to display a skill-list that will have a list of items.
+         * @example <div resume-skill-list label="Something:" items="things" multiColumn="true" includes="includes" excludes="excludes"></div>
+         */
+         module.directive(
+          'resumeSkillsList',
+          [
+            function () {
+              return {
+                scope: {
+                  label: '@',
+                  items: '=',
+                  multiColumn: '=',
+                  includes: '=',
+                  excludes: '='
+                },
+                templateUrl: 'resume-skills-list.html',
                 link: function (scope, element, attributes) {
                   /*
                    * TODO - I should probably find a better way to style this than 2 classes, however,
@@ -829,6 +889,34 @@
                 return name.given + (name.middle ? " " + name.middle + " " : " ") + name.surname;
               };
 
+              /**
+               * @ngdoc method
+               * @param {array} skills the skills to potentially filter out
+               * @param {array} includes the names of the topics/labels only keep
+               * @param {array} excludes the names of the topics/labels to filter out
+               * @description Takes list of skills and filters that list based on the passed in includes/excludes
+               * @returns {array} the skills after being filtered
+               */
+               service.filterSkills = function(skills, includes, excludes) {
+                if (!skills) {
+                  return [];
+                }
+
+                var toRet = [];
+
+                if (includes && includes.length) {
+                  toRet = skills.filter(s => s.labels.some(l => includes.indexOf(l) !== -1));
+                } else {
+                  toRet = skills;
+                }
+
+                if (excludes && excludes.length) {
+                  toRet = toRet.filter(s => s.labels.every(l => excludes.indexOf(l) === -1));
+                }
+
+                return toRet;
+              };
+
               return service;
             }
           ]
@@ -843,6 +931,46 @@
          */
         module.filter(
           'fullName',
+          [
+            'resumeService',
+            function (resumeService) {
+              return function (name) {
+                return resumeService.formatFullName(name);
+              };
+            }
+          ]
+        );
+
+        /**
+         * @ngdoc filter
+         * @requires resumeService
+         * @param {object} input the skill to potentially filter out
+         * @param {array} includes the names of topics/labels to include
+         * @param {array} excludes the names of topics/labels to exclude
+         * @description Use this filter to only display the skills for the specified topics.
+         * @example {{skill | filterOutSkills: includes:excludes}}
+         */
+         module.filter(
+          'filterOutSkills',
+          [
+            'resumeService',
+            function (resumeService) {
+              return function (input, includes, excludes) {
+                return resumeService.filterSkills(input, includes, excludes).map(s => s.text);
+              };
+            }
+          ]
+        );
+
+        /**
+         * @ngdoc filter
+         * @requires resumeService
+         * @param {object} name the name object that contains the given name, surname, and middle name
+         * @description Use this filter to display a full name from an object with parts of that full name.
+         * @example {{nameObject | fullName}}
+         */
+         module.filter(
+          'excludeSkills',
           [
             'resumeService',
             function (resumeService) {
@@ -876,6 +1004,8 @@
             ) {
               $scope.contactLink = resumeService.contactLink;
               $scope.fullName = resumeService.fullName;
+              $scope.includes = $window.includes;
+              $scope.excludes = $window.excludes;
               $scope.resume = Resume.get({id: 123});
               $scope.resume.$promise.catch(
                 function (error) {
@@ -1050,6 +1180,20 @@
       </ul>
     </script>
 
+    <script id="resume-skills-list.html"
+            type="text/ng-template">
+      <h3 class="sub_section">
+        <span ng-bind="label">
+        </span>
+      </h3>
+      <ul ng-class="ulClass">
+        <li ng-class="liClass"
+            ng-repeat="item in items | filterOutSkills:includes:excludes"
+            ng-bind="item">
+        </li>
+      </ul>
+    </script>
+
   </head>
 
   <body ng-controller="ResumeController">
@@ -1156,17 +1300,22 @@
              multi-column="false">
         </div>
 
+        <!-- TODO: need to think how to condense things if includes/excludes ends up empty-->
         <div ng-if="item.technologies.length"
-             resume-sub-section
+             resume-skills-list
              label="Technologies:"
              items="item.technologies"
+             includes="includes"
+             excludes="excludes"
              multi-column="true">
         </div>
 
         <div ng-if="item.soft_skills.length"
-             resume-sub-section
+             resume-skills-list
              label="Soft Skills:"
              items="item.soft_skills"
+             includes="includes"
+             excludes="excludes"
              multi-column="true">
         </div>
 
